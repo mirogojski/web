@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Slideshow from '@/components/sections/Slideshow.astro';
+import type { SlideshowPhoto } from '@/components/sections/Slideshow.astro';
+import { fetchGooglePhotosAlbum, googlePhotoUrl } from '@/lib/googlePhotos';
+
+/**
+ * Photo gallery, read from a public Google Photos album at build time.
+ *
+ * Set PUBLIC_GOOGLE_PHOTOS_ALBUM_URL as a build variable to point this at an
+ * album - see .env.example. The album must be shared with "anyone with the
+ * link". Until one is configured the page shows a short notice instead.
+ *
+ * Google Photos carries no alt text, so descriptions are written here, keyed by
+ * Google's stable per-photo id (the CDN path segment after /pw/). Keying by id
+ * rather than album position matters: adding or reordering one photo would
+ * otherwise shift every description onto the wrong image. Photos not listed
+ * still appear, with a generic description.
+ */
+const albumUrl = import.meta.env.PUBLIC_GOOGLE_PHOTOS_ALBUM_URL;
+
+const googlePhotos = albumUrl ? await fetchGooglePhotosAlbum(albumUrl, { maxPhotos: 60 }) : [];
+
+const descriptions = new Map<string, { alt: string; caption?: string; skip?: boolean }>([
+  // ['<photo id>', { alt: 'Arkade na Mirogoju u jesen', caption: 'Arkade' }],
+]);
+
+/** Google's stable per-photo id - the CDN path segment after /pw/. */
+function photoId(baseUrl: string): string {
+  return baseUrl.split('/pw/')[1] ?? baseUrl;
+}
+
+const remotePhotos: SlideshowPhoto[] = googlePhotos
+  .map((photo, index) => {
+    const described = descriptions.get(photoId(photo.baseUrl));
+    if (described?.skip) return null;
+
+    return {
+      src: googlePhotoUrl(photo.baseUrl, 1600),
+      thumbnail: googlePhotoUrl(photo.baseUrl, 240),
+      alt: described?.alt ?? `Fotografija ${index + 1} iz albuma`,
+      caption: described?.caption,
+      width: photo.width,
+      height: photo.height,
+    } satisfies SlideshowPhoto;
+  })
+  .filter((photo): photo is SlideshowPhoto => photo !== null);
+
+// Fallback photos. Add files to public/photos/ and describe them here.
+const localPhotos: SlideshowPhoto[] = [];
+
+const photos = remotePhotos.length > 0 ? remotePhotos : localPhotos;
+---
+
+<BaseLayout
+  title="Fotografije"
+  description="Fotografije Mirogoja — arkade, staze i groblje kroz godišnja doba."
+>
+  <section class="pt-12 pb-6 md:pt-16 md:pb-8 px-6">
+    <div class="container max-w-3xl mx-auto text-center" data-animate>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Fotografije</h1>
+    </div>
+  </section>
+
+  {
+    photos.length > 0 ? (
+      <Slideshow
+        photos={photos}
+        spacing="tight"
+        autoplay
+        interval={6000}
+        label="Galerija fotografija Mirogoja"
+      />
+    ) : (
+      <section class="pb-20 px-6">
+        <div class="container max-w-2xl mx-auto rounded-xl border bg-card p-8 text-center">
+          <h2 class="text-xl font-semibold">Album još nije povezan</h2>
+          <p class="mt-3 text-sm text-muted-foreground leading-relaxed">
+            Postavite <code class="font-mono">PUBLIC_GOOGLE_PHOTOS_ALBUM_URL</code> na javno
+            podijeljeni Google Photos album, ili dodajte fotografije u
+            <code class="font-mono">public/photos/</code> i popišite ih u
+            <code class="font-mono">src/pages/fotos.astro</code>. Upute su u
+            <code class="font-mono">.env.example</code>.
+          </p>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>

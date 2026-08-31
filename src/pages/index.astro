@@ -1,0 +1,226 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+/*
+ * MIROGOJ — naslovna stranica
+ *
+ * Stranica je zapis skupine prijatelja koji su svaki dan prolazili pokraj
+ * Mirogoja na putu u školu. Povijesni podaci o groblju općeniti su i
+ * provjerljivi. Osobna sjećanja upisuju se u `zapisi` kako se prikupe —
+ * ne izmišljam ih.
+ */
+
+// Osnovni podaci o groblju
+const groblje = {
+  ime: 'Mirogoj',
+  grad: 'Zagreb',
+  otvoreno: '1876.',
+  arhitekt: 'Hermann Bollé',
+};
+
+// Groblje — opci, provjerljivi opis
+const oGroblju = [
+  {
+    naslov: 'Arkade',
+    tekst:
+      'Mirogojske arkade djelo su Hermanna Bolléa, arhitekta koji je obilježio Zagreb druge polovine 19. stoljeća. Dugi niz nadsvođenih hodnika s kupolama danas se smatra jednim od najljepših grobljanskih sklopova u Europi.',
+  },
+  {
+    naslov: 'Otvoreno 1876.',
+    tekst:
+      'Groblje je otvoreno 1876. godine na zemljištu koje je nekoć bilo posjed Ljudevita Gaja. Nastalo je kao zajedničko gradsko groblje, na kojemu su od početka mjesto imali pripadnici svih vjera.',
+  },
+  {
+    naslov: 'Zajedničko počivalište',
+    tekst:
+      'Na Mirogoju su katolički, pravoslavni, židovski, muslimanski i evangelički dio, kao i grobovi onih bez vjerske pripadnosti. To je rijetkost među europskim gradskim grobljima i jedna od bitnih osobina ovoga mjesta.',
+  },
+  {
+    naslov: 'Park i skulptura',
+    tekst:
+      'Mirogoj je i park i zbirka skulpture pod otvorenim nebom. Nadgrobni spomenici djela su hrvatskih kipara kroz više naraštaja, a stabla i staze uređeni su kao parkovna cjelina.',
+  },
+  {
+    naslov: 'Cesta u školu',
+    tekst:
+      'Za mnoge Zagrepčane Mirogoj nije samo groblje nego dio dnevnog puta. Uz njegov zid prolazi se pješice i tramvajem, u svako doba godine, a taj zid i ta stabla ostaju u pamćenju onih koji su tuda odrastali.',
+  },
+  {
+    naslov: 'Studeni',
+    tekst:
+      'Prvoga studenoga Mirogoj se mijenja. Staze su pune, svijeće gore duž arkada, a grad koji obično prolazi mimo groblja tada u njega ulazi. Tko je tuda išao u školu, taj je dan gledao izbliza.',
+  },
+];
+
+/*
+ * ZAPISI
+ *
+ * Ovdje se upisuju osobna sjećanja i priče — o putu u školu, o razredu,
+ * o godinama u kojima se tuda prolazilo. Upisuje se ono što se prikupi.
+ */
+const zapisi: Array<{ naslov: string; tekst: string }> = [
+  {
+    naslov: 'Mjesto',
+    tekst: `${groblje.ime}, ${groblje.grad} — otvoreno ${groblje.otvoreno}, po projektu ${groblje.arhitekt}a.`,
+  },
+];
+---
+
+<BaseLayout
+  title="Mirogoj"
+  description="Zapisi o zagrebačkom Mirogoju — o Bolléovim arkadama, o ljudima koji tu počivaju i o skupini prijatelja koja je svaki dan prolazila pokraj groblja na putu u školu."
+>
+  {/* ===== Hero ===== */}
+  <section class="section-kamen relative overflow-hidden">
+    <div class="container max-w-5xl mx-auto px-6 py-20 md:py-28" data-animate="fade">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-klein">
+        Zagreb <span aria-hidden="true">·</span> Mirogoj <span aria-hidden="true">·</span> 1876.
+      </p>
+
+      <h1
+        class="font-serif-display mt-6 text-5xl leading-[1.05] md:text-7xl lg:text-8xl max-w-4xl text-balance"
+      >
+        Mirogoj
+      </h1>
+
+      <div class="pleter-rule mt-8 max-w-xs" aria-hidden="true"></div>
+
+      <p class="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed">
+        Groblje pod Medvednicom, Bolléove arkade i put kojim se išlo u školu. Ova stranica čuva
+        zapise o Mirogoju — o onima koji tu počivaju i o nama koji smo svakoga dana prolazili pokraj
+        njegova zida.
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row gap-4">
+        <a
+          href="#groblje"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-klein text-klein-foreground text-base font-semibold h-12 px-10 transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          O groblju
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-input bg-background text-base font-semibold h-12 px-10 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          Javite se
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== Put u skolu ===== */}
+  <section class="py-16 md:py-24">
+    <div class="container max-w-3xl mx-auto px-6" data-animate="fade">
+      <h2 class="font-serif-display text-3xl md:text-4xl text-klein">Put u školu</h2>
+      <div class="pleter-rule mt-5 max-w-[10rem]" aria-hidden="true"></div>
+
+      <p class="pocetno-slovo mt-8 text-lg leading-relaxed text-klein">
+        Svako jutro istim putem, uz zid koji se činio dužim nego što jest. Iza njega arkade i
+        stabla, pred nama škola. Groblje je bilo dio rasporeda dana kao i tramvajska stanica — nešto
+        pokraj čega se prolazi, ne razmišljajući previše.
+      </p>
+
+      <p class="mt-6 text-lg leading-relaxed text-klein">
+        Tek kasnije čovjek shvati koliko je to bilo neobično. Prolazili smo svakodnevno pokraj
+        mjesta na kojemu počiva veći dio onoga što se u školi uči — pjesnici čije smo pjesme napamet
+        znali, ljudi iz čitanki i sa spomen-ploča.
+      </p>
+
+      <p class="mt-6 text-lg leading-relaxed text-klein">
+        Ova stranica nastala je iz tog prolaženja. Zapisi o groblju, o ljudima koji tu leže, i o
+        skupini prijatelja kojoj je Mirogoj bio putokaz na putu u školu.
+      </p>
+    </div>
+  </section>
+
+  {/* ===== O groblju ===== */}
+  <section id="groblje" class="section-kamen py-16 md:py-24 scroll-mt-16">
+    <div class="container max-w-5xl mx-auto px-6">
+      <div class="max-w-3xl" data-animate="fade">
+        <h2 class="font-serif-display text-3xl md:text-4xl">O groblju</h2>
+        <div class="pleter-rule mt-5 max-w-[10rem]" aria-hidden="true"></div>
+        <p class="mt-6 text-lg leading-relaxed">
+          Mirogoj je zagrebačko gradsko groblje, otvoreno 1876. godine. Uz počivalište, ono je i
+          arhitektonska cjelina, park i zbirka skulpture — i mjesto koje o povijesti grada govori
+          jednako mnogo kao i njegove ulice.
+        </p>
+      </div>
+
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-12" data-animate="fade">
+        {
+          oGroblju.map((blok) => (
+            <article class="border-l-2 border-klein pl-6">
+              <h3 class="font-serif-display text-2xl">{blok.naslov}</h3>
+              <p class="mt-3 leading-relaxed">{blok.tekst}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ===== Zapisi ===== */}
+  <section class="py-16 md:py-24">
+    <div class="container max-w-3xl mx-auto px-6" data-animate="fade">
+      <h2 class="font-serif-display text-3xl md:text-4xl text-klein">Zapisi</h2>
+      <div class="pleter-rule mt-5 max-w-[10rem]" aria-hidden="true"></div>
+
+      {
+        zapisi.length > 0 && (
+          <dl class="mt-8 space-y-6">
+            {zapisi.map((zapis) => (
+              <div class="border-l-2 border-klein pl-6">
+                <dt class="font-serif-display text-xl text-klein">{zapis.naslov}</dt>
+                <dd class="mt-2 leading-relaxed text-klein">{zapis.tekst}</dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+
+      <div class="mt-8 rounded-lg border border-dashed bg-muted/40 p-6 md:p-8">
+        <p class="leading-relaxed text-klein">
+          Sjećanja na put u školu, na razred i na godine u kojima se tuda prolazilo upisuju se kako
+          se prikupe.
+        </p>
+        <p class="mt-4 leading-relaxed text-klein">
+          Imate fotografiju, priču ili ime koje bi ovdje trebalo stajati?{' '}
+          <a
+            href="/contact"
+            class="font-medium text-klein underline decoration-klein decoration-2 underline-offset-4 hover:text-klein/80 transition-colors"
+          >
+            Javite se
+          </a>{' '}
+          i bit će uvršteno.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== Zavrsni poziv ===== */}
+  <section class="section-inverted">
+    <div class="py-14 md:py-28 px-6">
+      <div class="container max-w-3xl mx-auto text-center" data-animate="scale">
+        <h2 class="font-serif-display text-3xl md:text-5xl">I vi ste tuda prolazili?</h2>
+        <p class="mt-5 md:mt-6 text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
+          Mirogoj je dio puta mnogih naraštaja Zagrepčana. Ako imate svoju priču o njemu — iz škole,
+          iz susjedstva ili iz obitelji — javite se i dopunimo zapis zajedno.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 md:mt-10 justify-center">
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-klein text-klein-foreground text-base font-semibold h-12 px-10 transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            Javite se
+          </a>
+          <a
+            href="/blog"
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-input bg-background text-base font-semibold h-12 px-10 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            Zapisi o Mirogoju
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

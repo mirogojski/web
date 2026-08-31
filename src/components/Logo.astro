@@ -1,0 +1,73 @@
+---
+/**
+ * Logo Component
+ *
+ * Mirogoj brand logo: an inline SVG mark drawn after the arcade cupolas of the
+ * Mirogoj cemetery, with an optional wordmark beside it.
+ *
+ * Drawn inline as SVG rather than loaded as a bitmap so it stays crisp at any
+ * size and follows the theme through currentColor - no separate light and dark
+ * files to keep in step.
+ *
+ * @example
+ * ```astro
+ * <Logo />
+ * <Logo showText={false} />
+ * <Logo size="lg" />
+ * ```
+ */
+interface Props {
+  /** Show the wordmark next to the mark */
+  showText?: boolean;
+  /** Size variant */
+  size?: 'sm' | 'md' | 'lg';
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const { showText = true, size = 'md', class: className = '' } = Astro.props;
+
+const markSize = {
+  sm: 'h-6 w-6',
+  md: 'h-7 w-7',
+  lg: 'h-9 w-9',
+};
+
+const textSize = {
+  sm: 'text-base',
+  md: 'text-lg',
+  lg: 'text-2xl',
+};
+---
+
+<a
+  href="/"
+  class:list={['inline-flex items-center gap-2 text-foreground', className]}
+  aria-label="Mirogoj — početna"
+>
+  <svg
+    class:list={[markSize[size], 'shrink-0 text-klein']}
+    viewBox="0 0 120 120"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="6"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <!-- Central cupola -->
+    <path d="M 42 62 A 18 18 0 0 1 78 62"></path>
+    <!-- Lantern above it -->
+    <path d="M 60 44 V 32"></path>
+    <!-- Flanking arcade arches -->
+    <path d="M 18 74 A 11 11 0 0 1 40 74"></path>
+    <path d="M 80 74 A 11 11 0 0 1 102 74"></path>
+    <!-- Ground line of the colonnade -->
+    <path d="M 14 96 H 106"></path>
+  </svg>
+
+  {
+    showText && (
+      <span class:list={['font-serif font-semibold tracking-tight', textSize[size]]}>Mirogoj</span>
+    )
+  }
+</a>

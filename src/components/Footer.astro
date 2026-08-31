@@ -1,0 +1,80 @@
+---
+/**
+ * Footer Component
+ *
+ * Unified footer with boxed and fullWidth variants.
+ * Contains navigation links, resources, and creator info.
+ *
+ * @example
+ * ```astro
+ * <Footer />
+ * <Footer variant="fullWidth" />
+ * ```
+ */
+import Logo from './Logo.astro';
+
+interface Props {
+  /** Layout variant - boxed (default) or fullWidth */
+  variant?: 'boxed' | 'fullWidth';
+}
+
+const { variant = 'boxed' } = Astro.props;
+
+/**
+ * The footer no longer carries navigation: every page is reachable from the
+ * header, so duplicating the list here only added height. What remains is the
+ * brand blurb and the author credit.
+ */
+const containerClass =
+  variant === 'fullWidth' ? 'w-full px-4' : 'container max-w-5xl mx-auto px-4 sm:px-6';
+---
+
+<footer class="border-t bg-background">
+  <div class:list={[containerClass, 'py-8 md:py-12']}>
+    <div class="grid gap-6 md:grid-cols-2 md:gap-8">
+      <!-- Brand -->
+      <div>
+        <Logo />
+        <p class="mt-3 md:mt-4 text-sm text-muted-foreground">
+          Zapisi o zagrebačkom Mirogoju — o Bolléovim arkadama, o ljudima koji tu počivaju i o putu
+          u školu pokraj groblja.
+        </p>
+      </div>
+
+      <!-- Creator -->
+      <div class="md:text-right">
+        <h3 class="font-semibold mb-2 md:mb-4">Autor</h3>
+        <p class="text-sm text-muted-foreground">Nikola Pejdo</p>
+        <p class="text-sm text-muted-foreground mt-1">
+          <a
+            href="https://pejdo.com"
+            class="font-medium text-foreground hover:text-primary transition-colors inline-flex items-center gap-1 py-1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            pejdo.com
+            <svg
+              class="h-3 w-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              ></path>
+            </svg>
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="mt-6 border-t pt-6 md:mt-8 md:pt-8 text-center text-sm text-muted-foreground">
+      <p>&copy; {new Date().getFullYear()} Nikola Pejdo. Sva prava pridržana.</p>
+    </div>
+  </div>
+</footer>

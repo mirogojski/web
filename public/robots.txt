@@ -1,0 +1,8 @@
+# robots.txt for Mirogoj
+# https://mirogoj.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://mirogoj.com/sitemap-index.xml
