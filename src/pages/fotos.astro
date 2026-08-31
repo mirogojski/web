@@ -7,9 +7,14 @@ import { fetchGooglePhotosAlbum, googlePhotoUrl } from '@/lib/googlePhotos';
 /**
  * Photo gallery, read from a public Google Photos album at build time.
  *
- * Set PUBLIC_GOOGLE_PHOTOS_ALBUM_URL as a build variable to point this at an
- * album - see .env.example. The album must be shared with "anyone with the
- * link". Until one is configured the page shows a short notice instead.
+ * The album link is a public "anyone with the link" share URL - nothing secret -
+ * so it lives here as the default. That keeps the build working on any host
+ * without configuring environment variables. Cloudflare in particular only
+ * exposes build-time variables under Settings > Build, not the Runtime section,
+ * which does not apply to static sites.
+ *
+ * To point at a different album without editing this file, set
+ * PUBLIC_GOOGLE_PHOTOS_ALBUM_URL as a build variable; it takes precedence.
  *
  * Google Photos carries no alt text, so descriptions are written here, keyed by
  * Google's stable per-photo id (the CDN path segment after /pw/). Keying by id
@@ -17,12 +22,20 @@ import { fetchGooglePhotosAlbum, googlePhotoUrl } from '@/lib/googlePhotos';
  * otherwise shift every description onto the wrong image. Photos not listed
  * still appear, with a generic description.
  */
-const albumUrl = import.meta.env.PUBLIC_GOOGLE_PHOTOS_ALBUM_URL;
+const DEFAULT_ALBUM_URL = 'https://photos.app.goo.gl/iSXhYGCvXTtz9Dvp9';
+
+const albumUrl = import.meta.env.PUBLIC_GOOGLE_PHOTOS_ALBUM_URL || DEFAULT_ALBUM_URL;
 
 const googlePhotos = albumUrl ? await fetchGooglePhotosAlbum(albumUrl, { maxPhotos: 60 }) : [];
 
 const descriptions = new Map<string, { alt: string; caption?: string; skip?: boolean }>([
-  // ['<photo id>', { alt: 'Arkade na Mirogoju u jesen', caption: 'Arkade' }],
+  [
+    'AP1GczNpg238LW83D7y1D8RvEwgKn-b1lMr78-H54X24Mamywl2l3kAjUoFE4CcMllptdPCpokBfwQe6jFEdGyWv8Pt-Hlx5H2TEEPpvqQWnASpj_VIDpCg',
+    {
+      alt: 'Crtež svinje tušem i akvarelom na svijetlom papiru',
+      caption: 'Sus Minervam docet — svinja uči Minervu',
+    },
+  ],
 ]);
 
 /** Google's stable per-photo id - the CDN path segment after /pw/. */
@@ -54,7 +67,7 @@ const photos = remotePhotos.length > 0 ? remotePhotos : localPhotos;
 
 <BaseLayout
   title="Fotografije"
-  description="Fotografije Mirogoja — arkade, staze i groblje kroz godišnja doba."
+  description="Galerija — fotografije i crteži iz albuma Sus Minervam docet."
 >
   <section class="pt-12 pb-6 md:pt-16 md:pb-8 px-6">
     <div class="container max-w-3xl mx-auto text-center" data-animate>
@@ -66,10 +79,12 @@ const photos = remotePhotos.length > 0 ? remotePhotos : localPhotos;
     photos.length > 0 ? (
       <Slideshow
         photos={photos}
+        fit="contain"
+        stage="canvas"
         spacing="tight"
         autoplay
         interval={6000}
-        label="Galerija fotografija Mirogoja"
+        label="Galerija fotografija"
       />
     ) : (
       <section class="pb-20 px-6">
