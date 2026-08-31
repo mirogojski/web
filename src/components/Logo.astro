@@ -2,7 +2,7 @@
 /**
  * Logo Component
  *
- * Mirogoj brand logo: three arcade arches beside a "MIROGOJ" wordmark, drawn
+ * Mirogoj brand logo: three arcade arches beside a "MIROGOJ.COM" wordmark, drawn
  * after the arcade motif in the Privredna banka Zagreb mark but without its
  * enclosing box and without the rule above the arches.
  *
@@ -21,11 +21,12 @@
  *    matters for a mark that sits in the header of every page.
  *
  * Outlines were generated from Montserrat-ExtraBold.otf with fontTools, scaled
- * to a 100-unit cap height, kerned from the font's own GPOS table (O+J = -15) and
- * letterspaced +10/1000em, which all-caps settings need to stay legible. The
- * viewBox runs 0 0 882 104: the round letters O and G overshoot the cap line by
- * two units at each end, as they should optically, so the baseline sits at y=102
- * and the cap line at y=2. Being all caps there are no descenders.
+ * to a 100-unit cap height, kerned from the font's own GPOS table (O+J = -15,
+ * J+. = -6, .+C = -20, C+O = -15) and letterspaced +10/1000em, which all-caps
+ * settings need to stay legible. The viewBox runs 0 0 1284 104: the round letters
+ * O, G and C overshoot the cap line by two units at each end, as they should
+ * optically, so the baseline sits at y=102 and the cap line at y=2. Being all
+ * caps there are no descenders.
  *
  * Regenerating the wordmark is a manual step - there is no build script - so
  * treat the path data as a fixed asset.
@@ -54,13 +55,17 @@ const { showText = true, size = 'md', class: className = '' } = Astro.props;
  *
  * The values look small because the box is all caps: with no descenders the
  * viewBox is only 104 units tall against the cap height of 100, so h-4 renders
- * letters 15px tall. These match the cap heights the earlier lowercase mark had
- * at h-5/h-6/h-8.
+ * letters 15px tall.
+ *
+ * md and lg step up at sm: with ".COM" the wordmark is 12.3 times as wide as it
+ * is tall, which at h-4 comes to 198px. On a 320px viewport the container padding
+ * and the theme and menu buttons leave about 200px, so the full height only
+ * starts once there is room for it.
  */
 const fullSize = {
   sm: 'h-3.5',
-  md: 'h-4',
-  lg: 'h-6',
+  md: 'h-3.5 sm:h-4',
+  lg: 'h-4 sm:h-6',
 };
 
 const markOnlySize = {
@@ -76,24 +81,34 @@ const ARCHES =
 /** "MIROGOJ" in Montserrat ExtraBold outlines, cap height 100, origin at 0,0. */
 const WORDMARK =
   'M116.3 102 116 2H92.7L58.4 59.7L23.3 2H0V102H26.1V50.4L51.7 92.1H64.3L90 49L90.3 102Z M137.7 102H166V2H137.7Z M249.4 102H279.7L258.1 70.6C270.6 64.6 277.7 53.7 277.7 39C277.7 16.1 260.6 2 233.3 2H187.6V102H215.9V75.4H231.3ZM249.1 39C249.1 48.1 243.3 53.6 231.6 53.6H215.9V24.3H231.6C243.3 24.3 249.1 29.7 249.1 39Z M345.1 104C377.1 104 400.7 82 400.7 52C400.7 22 377.1 0 345.1 0C313.1 0 289.6 22 289.6 52C289.6 82 313.1 104 345.1 104ZM345.1 80.6C330 80.6 318.1 69.3 318.1 52C318.1 34.7 330 23.4 345.1 23.4C360.3 23.4 372.1 34.7 372.1 52C372.1 69.3 360.3 80.6 345.1 80.6Z M484 77.3C479 79.6 474 80.6 468.7 80.6C451.9 80.6 440.4 68.9 440.4 52C440.4 34.7 451.9 23.4 469 23.4C478.6 23.4 486.4 27 493.3 34.6L511.3 18.3C501.4 6.4 486.3 0 467.6 0C435.1 0 411.9 21.6 411.9 52C411.9 82.4 435.1 104 467 104C481.6 104 497.4 99.6 509 91.3V49.9H484Z M578.9 104C610.9 104 634.4 82 634.4 52C634.4 22 610.9 0 578.9 0C546.9 0 523.3 22 523.3 52C523.3 82 546.9 104 578.9 104ZM578.9 80.6C563.7 80.6 551.9 69.3 551.9 52C551.9 34.7 563.7 23.4 578.9 23.4C594 23.4 605.9 34.7 605.9 52C605.9 69.3 594 80.6 578.9 80.6Z M670.4 104C695.6 104 709 91.1 709 65.1V2H646.4V23.9H681V66.9C681 76.4 676.6 81.4 668.4 81.4C662 81.4 656.4 77.9 651.1 71L635.7 89.3C643.4 98.9 655.9 104 670.4 104Z';
+
+/**
+ * ".COM" in the same face, continuing the same kerned run so the spacing after
+ * the J is the font's own. Held at 55% opacity rather than a second colour, so it
+ * stays subordinate to the name while still following the theme through
+ * currentColor.
+ */
+const TLD =
+  'M738.9 103.3C748.1 103.3 755.1 96.6 755.1 87.1C755.1 77.4 748.1 71.1 738.9 71.1C729.7 71.1 722.6 77.4 722.6 87.1C722.6 96.6 729.7 103.3 738.9 103.3Z M817.6 104C836 104 850.9 97.3 860.6 85.1L842.6 68.9C836.3 76.4 828.6 80.6 819 80.6C802.6 80.6 791.1 69.1 791.1 52C791.1 34.9 802.6 23.4 819 23.4C828.6 23.4 836.3 27.6 842.6 35.1L860.6 18.9C850.9 6.7 836 0 817.6 0C785.9 0 762.6 21.6 762.6 52C762.6 82.4 785.9 104 817.6 104Z M922.9 104C954.9 104 978.4 82 978.4 52C978.4 22 954.9 0 922.9 0C890.9 0 867.3 22 867.3 52C867.3 82 890.9 104 922.9 104ZM922.9 80.6C907.7 80.6 895.9 69.3 895.9 52C895.9 34.7 907.7 23.4 922.9 23.4C938 23.4 949.9 34.7 949.9 52C949.9 69.3 938 80.6 922.9 80.6Z M1111 102 1110.7 2H1087.4L1053.1 59.7L1018 2H994.7V102H1020.9V50.4L1046.4 92.1H1059L1084.7 49L1085 102Z';
 ---
 
 <a
   href="/"
   class:list={['inline-flex items-center text-klein', className]}
-  aria-label="Mirogoj — početna"
+  aria-label="mirogoj.com — početna"
 >
   {
     showText ? (
       <svg
         class:list={[fullSize[size], 'w-auto shrink-0']}
-        viewBox="0 0 882 104"
+        viewBox="0 0 1284 104"
         fill="none"
         aria-hidden="true"
       >
         <path d={ARCHES} stroke="currentColor" stroke-width="9" stroke-linecap="butt" />
         <g transform="translate(173 0)">
           <path d={WORDMARK} fill="currentColor" />
+          <path d={TLD} fill="currentColor" fill-opacity="0.55" />
         </g>
       </svg>
     ) : (
