@@ -2,7 +2,7 @@
 /**
  * Logo Component
  *
- * Mirogoj brand logo: three arcade arches beside a "Mirogoj" wordmark, drawn
+ * Mirogoj brand logo: three arcade arches beside a "MIROGOJ" wordmark, drawn
  * after the arcade motif in the Privredna banka Zagreb mark but without its
  * enclosing box and without the rule above the arches.
  *
@@ -21,9 +21,11 @@
  *    matters for a mark that sits in the header of every page.
  *
  * Outlines were generated from Montserrat-ExtraBold.otf with fontTools, scaled
- * to a 100-unit cap height, kerned from the font's own GPOS table (r+o = -7) and
- * tracked -8/1000em. The viewBox runs 0 0 730 144: cap top at y=0, baseline at
- * y=114.86, descenders of g and j reaching y=143.86.
+ * to a 100-unit cap height, kerned from the font's own GPOS table (O+J = -15) and
+ * letterspaced +10/1000em, which all-caps settings need to stay legible. The
+ * viewBox runs 0 0 882 104: the round letters O and G overshoot the cap line by
+ * two units at each end, as they should optically, so the baseline sits at y=102
+ * and the cap line at y=2. Being all caps there are no descenders.
  *
  * Regenerating the wordmark is a manual step - there is no build script - so
  * treat the path data as a fixed asset.
@@ -49,11 +51,16 @@ const { showText = true, size = 'md', class: className = '' } = Astro.props;
 /**
  * Heights are set rather than widths, so the arches keep the same optical
  * weight next to the header navigation whether or not the wordmark shows.
+ *
+ * The values look small because the box is all caps: with no descenders the
+ * viewBox is only 104 units tall against the cap height of 100, so h-4 renders
+ * letters 15px tall. These match the cap heights the earlier lowercase mark had
+ * at h-5/h-6/h-8.
  */
 const fullSize = {
-  sm: 'h-5',
-  md: 'h-6',
-  lg: 'h-8',
+  sm: 'h-3.5',
+  md: 'h-4',
+  lg: 'h-6',
 };
 
 const markOnlySize = {
@@ -62,13 +69,13 @@ const markOnlySize = {
   lg: 'h-7',
 };
 
-/** Three arches: springing line at y=34.36, baseline at y=114.86. */
+/** Three arches: arc crowns level with the cap line, feet on the baseline at y=102. */
 const ARCHES =
-  'M4.5 114.86V34.36A15 15 0 0 1 34.5 34.36V114.86 M48.5 114.86V34.36A15 15 0 0 1 78.5 34.36V114.86 M92.5 114.86V34.36A15 15 0 0 1 122.5 34.36V114.86';
+  'M4.5 102V21.5A15 15 0 0 1 34.5 21.5V102 M48.5 102V21.5A15 15 0 0 1 78.5 21.5V102 M92.5 102V21.5A15 15 0 0 1 122.5 21.5V102';
 
-/** "Mirogoj" in Montserrat ExtraBold outlines, cap height 100, origin at 0,0. */
+/** "MIROGOJ" in Montserrat ExtraBold outlines, cap height 100, origin at 0,0. */
 const WORDMARK =
-  'M116.3 114.9 116 14.9H92.7L58.4 72.6L23.3 14.9H0V114.9H26.1V63.3L51.7 105H64.3L90 61.9L90.3 114.9Z M147.4 28.9C157.4 28.9 164 22.6 164 14C164 5.9 157.4 0 147.4 0C137.4 0 130.9 6.3 130.9 14.4C130.9 22.6 137.4 28.9 147.4 28.9ZM133.9 114.9H161V37.4H133.9Z M203.3 46.7V37.4H177.4V114.9H204.6V79.3C204.6 65.7 212.1 60.1 223.1 60.1C225.1 60.1 226.9 60.3 229.3 60.6V36.1C217.9 36.1 208.9 39.7 203.3 46.7Z M277.4 116.1C303 116.1 321.1 99.4 321.1 76C321.1 52.7 303 36.1 277.4 36.1C252.1 36.1 233.7 52.7 233.7 76C233.7 99.4 252.1 116.1 277.4 116.1ZM277.4 94.6C268.3 94.6 261.1 87.9 261.1 76C261.1 64.3 268.3 57.7 277.4 57.7C286.7 57.7 293.7 64.3 293.7 76C293.7 87.9 286.7 94.6 277.4 94.6Z M390 37.4V46.9C384.7 39.6 376.4 36.1 365.7 36.1C345.1 36.1 327.7 50.7 327.7 73.4C327.7 96.3 345.1 110.9 365.7 110.9C375.6 110.9 383.4 107.9 388.7 101.7V104.3C388.7 116.4 382.6 123 368 123C358.9 123 348.3 119.9 341.9 114.7L332 133.7C341.4 140.4 355.6 143.9 370.4 143.9C399.3 143.9 415.9 130 415.9 100.7V37.4ZM372.1 89.3C362.4 89.3 355.1 82.9 355.1 73.4C355.1 64 362.4 57.7 372.1 57.7C381.9 57.7 389 64 389 73.4C389 82.9 381.9 89.3 372.1 89.3Z M471 116.1C496.6 116.1 514.7 99.4 514.7 76C514.7 52.7 496.6 36.1 471 36.1C445.7 36.1 427.3 52.7 427.3 76C427.3 99.4 445.7 116.1 471 116.1ZM471 94.6C461.9 94.6 454.7 87.9 454.7 76C454.7 64.3 461.9 57.7 471 57.7C480.3 57.7 487.3 64.3 487.3 76C487.3 87.9 480.3 94.6 471 94.6Z M540.9 28.9C550.9 28.9 557.4 22.6 557.4 14C557.4 5.9 550.9 0 540.9 0C530.9 0 524.3 6.3 524.3 14.4C524.3 22.6 530.9 28.9 540.9 28.9ZM522.9 143.9C542.9 143.9 554.4 131.7 554.4 112.9V37.4H527.3V112.7C527.3 119.7 524 122.9 519.3 122.9C516.1 122.9 513.1 122 510.9 120.6L504 139.9C508.7 142.6 515.7 143.9 522.9 143.9Z';
+  'M116.3 102 116 2H92.7L58.4 59.7L23.3 2H0V102H26.1V50.4L51.7 92.1H64.3L90 49L90.3 102Z M137.7 102H166V2H137.7Z M249.4 102H279.7L258.1 70.6C270.6 64.6 277.7 53.7 277.7 39C277.7 16.1 260.6 2 233.3 2H187.6V102H215.9V75.4H231.3ZM249.1 39C249.1 48.1 243.3 53.6 231.6 53.6H215.9V24.3H231.6C243.3 24.3 249.1 29.7 249.1 39Z M345.1 104C377.1 104 400.7 82 400.7 52C400.7 22 377.1 0 345.1 0C313.1 0 289.6 22 289.6 52C289.6 82 313.1 104 345.1 104ZM345.1 80.6C330 80.6 318.1 69.3 318.1 52C318.1 34.7 330 23.4 345.1 23.4C360.3 23.4 372.1 34.7 372.1 52C372.1 69.3 360.3 80.6 345.1 80.6Z M484 77.3C479 79.6 474 80.6 468.7 80.6C451.9 80.6 440.4 68.9 440.4 52C440.4 34.7 451.9 23.4 469 23.4C478.6 23.4 486.4 27 493.3 34.6L511.3 18.3C501.4 6.4 486.3 0 467.6 0C435.1 0 411.9 21.6 411.9 52C411.9 82.4 435.1 104 467 104C481.6 104 497.4 99.6 509 91.3V49.9H484Z M578.9 104C610.9 104 634.4 82 634.4 52C634.4 22 610.9 0 578.9 0C546.9 0 523.3 22 523.3 52C523.3 82 546.9 104 578.9 104ZM578.9 80.6C563.7 80.6 551.9 69.3 551.9 52C551.9 34.7 563.7 23.4 578.9 23.4C594 23.4 605.9 34.7 605.9 52C605.9 69.3 594 80.6 578.9 80.6Z M670.4 104C695.6 104 709 91.1 709 65.1V2H646.4V23.9H681V66.9C681 76.4 676.6 81.4 668.4 81.4C662 81.4 656.4 77.9 651.1 71L635.7 89.3C643.4 98.9 655.9 104 670.4 104Z';
 ---
 
 <a
@@ -80,7 +87,7 @@ const WORDMARK =
     showText ? (
       <svg
         class:list={[fullSize[size], 'w-auto shrink-0']}
-        viewBox="0 0 730 144"
+        viewBox="0 0 882 104"
         fill="none"
         aria-hidden="true"
       >
@@ -92,7 +99,7 @@ const WORDMARK =
     ) : (
       <svg
         class:list={[markOnlySize[size], 'w-auto shrink-0']}
-        viewBox="0 14.86 127 104.5"
+        viewBox="0 2 127 104.5"
         fill="none"
         aria-hidden="true"
       >

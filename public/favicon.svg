@@ -1,16 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Mirogoj">
   <title>Mirogoj</title>
   <style>
-    .mark { fill: none; stroke: #223F99; stroke-width: 6; stroke-linecap: round }
+    .mark { fill: none; stroke: #223F99; stroke-width: 22; stroke-linecap: butt }
     @media (prefers-color-scheme: dark) { .mark { stroke: #ffffff } }
   </style>
-  <!-- Central cupola of the Mirogoj arcades -->
-  <path class="mark" d="M 42 62 A 18 18 0 0 1 78 62" />
-  <!-- Lantern above the cupola -->
-  <path class="mark" d="M 60 44 V 32" />
-  <!-- Flanking arcade arches -->
-  <path class="mark" d="M 18 74 A 11 11 0 0 1 40 74" />
-  <path class="mark" d="M 80 74 A 11 11 0 0 1 102 74" />
-  <!-- Ground line of the colonnade -->
-  <path class="mark" d="M 14 96 H 106" />
+  <!-- A single arcade arch, taken from the three-arch mark in the site logo
+       (src/components/Logo.astro). One arch rather than three because at 16px the
+       three blur into a picket fence: the curvature needs roughly a 2px stroke and
+       2px gaps at the same time, which does not fit. Drawn heavier and tighter than
+       the logo for the same reason. -->
+  <path class="mark" d="M25.0 106V60.0A35 35 0 0 1 95.0 60.0V106" />
 </svg>
