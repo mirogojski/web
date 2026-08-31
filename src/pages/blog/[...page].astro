@@ -31,10 +31,10 @@ function formatDate(date: Date) {
   title="Blog"
   description="Zapisi o Mirogoju — o ljudima koji tu počivaju, o Bolléovim arkadama i o groblju koje je od 1876. zajedničko počivalište pet vjera."
 >
-  <div class="container max-w-4xl mx-auto py-20">
-    <div class="mb-20">
-      <h1 class="text-7xl font-bold tracking-tight mb-8">Blog</h1>
-      <p class="text-xl text-muted-foreground">
+  <div class="container max-w-4xl mx-auto py-16">
+    <div class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Blog</h1>
+      <p class="text-lg text-muted-foreground">
         Zapisi o ljudima čija su imena na mirogojskim grobovima — pjesnicima, piscima, arhitektima,
         znanstvenicima i sportašima — i o samome groblju: o Bolléovim arkadama i o odluci iz 1876.
         da Mirogoj bude zajedničko počivalište pet vjera. Pokraj tih grobova prolazili smo svaki dan
@@ -50,7 +50,7 @@ function formatDate(date: Date) {
               href={`/blog/${post.id}`}
               class="flex items-center justify-between gap-8 -mx-6 px-6 py-4 rounded-lg transition-colors hover:bg-accent/50"
             >
-              <h2 class="text-4xl font-bold tracking-tight group-hover:text-primary transition-colors flex-1">
+              <h2 class="text-xl md:text-2xl font-semibold tracking-tight group-hover:text-primary transition-colors flex-1">
                 {post.data.title}
               </h2>
               <time
