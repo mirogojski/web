@@ -1,13 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Mirogoj">
-  <title>Mirogoj</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="mirogoj.com">
+  <title>mirogoj.com</title>
   <style>
-    .mark { fill: none; stroke: #223F99; stroke-width: 22; stroke-linecap: butt }
+    .mark { fill: none; stroke: #223F99; stroke-width: 20; stroke-linecap: butt }
     @media (prefers-color-scheme: dark) { .mark { stroke: #ffffff } }
   </style>
-  <!-- A single arcade arch, taken from the three-arch mark in the site logo
-       (src/components/Logo.astro). One arch rather than three because at 16px the
-       three blur into a picket fence: the curvature needs roughly a 2px stroke and
-       2px gaps at the same time, which does not fit. Drawn heavier and tighter than
-       the logo for the same reason. -->
-  <path class="mark" d="M25.0 106V60.0A35 35 0 0 1 95.0 60.0V106" />
+  <!-- A rounded lowercase m: a stem and two semicircular humps. It doubles as the
+       arcade motif of the site logo (src/components/Logo.astro), since an m drawn
+       this way is two arches sharing a pier.
+
+       Geometry is the favicon's own, not a scaled copy of the logo: heavier stroke,
+       tighter padding, and humps that are true semicircles. A favicon is read at
+       16px, where the logo's proportions thin out below a pixel. Wider than tall
+       (104x80 in the box) so the two counters stay open at that size. -->
+  <path class="mark" d="M18 90V51A21 21 0 0 1 60 51V90M60 51A21 21 0 0 1 102 51V90" />
 </svg>
