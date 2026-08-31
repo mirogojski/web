@@ -22,10 +22,24 @@ import { fetchVimeoVideos } from '@/lib/vimeo';
  * PUBLIC_VIMEO_VIDEO_URL overrides this list when set. Add links below to show
  * several videos, and use the `titles` prop on VideoEmbed to override any title
  * that reads as a working filename on Vimeo.
+ *
+ * These are public video links - nothing secret - so they live here rather than
+ * in an environment variable, which keeps the build working on any host without
+ * extra configuration. Same reasoning as the album link in fotos.astro.
+ *
+ * The videos are other people's work, embedded from Vimeo and left under their
+ * own titles. VideoEmbed shows the uploader's name beneath each one, so do not
+ * pass hideAuthor here: the credit is the point.
  */
+const DEFAULT_VIDEO_URLS = [
+  // Marko Vrdoljak, "Pulse of the city - ZAGREB" (2012) - timelapse portrait of
+  // the city, including its sacral heritage.
+  'https://vimeo.com/39847377',
+];
+
 const configuredUrl = import.meta.env.PUBLIC_VIMEO_VIDEO_URL;
 
-const videoUrls: string[] = configuredUrl ? [configuredUrl] : [];
+const videoUrls: string[] = configuredUrl ? [configuredUrl] : DEFAULT_VIDEO_URLS;
 
 const videos = videoUrls.length > 0 ? await fetchVimeoVideos(videoUrls, { width: 1280 }) : [];
 ---
