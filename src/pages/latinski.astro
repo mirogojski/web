@@ -168,11 +168,55 @@ const sententiae: Sententia[] = [
       </p>
     </header>
 
+    <form
+      class="mb-8"
+      role="search"
+      data-sententiae-search
+      hidden
+      aria-label="Pretraživanje sentencija"
+    >
+      <label for="sententiae-query" class="sr-only">Pretraži sentencije</label>
+      <div class="relative">
+        <svg
+          class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input
+          id="sententiae-query"
+          type="search"
+          autocomplete="off"
+          placeholder="Pretraži latinski, prijevod ili izvor"
+          class="w-full min-h-11 rounded-lg border bg-card pl-11 pr-4 py-2 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          data-sententiae-input
+        />
+      </div>
+      <p
+        class="mt-2 text-sm text-muted-foreground"
+        role="status"
+        aria-live="polite"
+        data-sententiae-status
+      >
+      </p>
+    </form>
+
     <div class="rounded-lg border bg-card" data-animate="fade">
-      <ul class="divide-y">
+      <ul class="divide-y" data-sententiae-list>
         {
           sententiae.map((item) => (
-            <li class="p-6 md:p-8">
+            <li
+              class="p-6 md:p-8"
+              data-sententia
+              data-haystack={`${item.latin} ${item.translation} ${item.source}`.toLowerCase()}
+            >
               <p class="text-lg md:text-xl font-semibold text-foreground italic">{item.latin}</p>
               <p class="text-muted-foreground mt-2">{item.translation}</p>
               <p class="text-sm text-muted-foreground/80 mt-3">{item.source}</p>
@@ -180,6 +224,77 @@ const sententiae: Sententia[] = [
           ))
         }
       </ul>
+      <p class="hidden p-6 md:p-8 text-muted-foreground" data-sententiae-empty>
+        Nema sentencije koja odgovara upitu.
+      </p>
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  /**
+   * Client-side filtering for the sententiae list.
+   *
+   * The form is rendered with the `hidden` attribute and only revealed here, so
+   * visitors without JavaScript never see a search box that cannot work. The full
+   * list is in the HTML either way - filtering only hides rows.
+   *
+   * Matching is a plain substring test against a precomputed data-haystack holding
+   * the Latin, the translation and the source, lowercased at build time. Diacritics
+   * are folded so "ceznja" finds "čežnja" and "Vergilije" is reachable as
+   * "vergilije".
+   */
+  function initSententiaeSearch(): void {
+    const form = document.querySelector<HTMLFormElement>('[data-sententiae-search]');
+    const input = document.querySelector<HTMLInputElement>('[data-sententiae-input]');
+    const status = document.querySelector<HTMLElement>('[data-sententiae-status]');
+    const empty = document.querySelector<HTMLElement>('[data-sententiae-empty]');
+    const items = Array.from(document.querySelectorAll<HTMLElement>('[data-sententia]'));
+
+    if (!form || !input || !status || !empty || items.length === 0) return;
+
+    // The box is useless without this script, so it stays hidden until now.
+    form.hidden = false;
+    form.addEventListener('submit', (event) => event.preventDefault());
+
+    /** Lowercases and strips diacritics, so c matches č and z matches ž. */
+    const fold = (value: string): string =>
+      value
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd');
+
+    const haystacks = items.map((item) => fold(item.dataset.haystack ?? ''));
+
+    /** Croatian plural for the match count: 1 sentencija, 2-4 sentencije, 5+ sentencija. */
+    function countLabel(count: number): string {
+      const lastTwo = count % 100;
+      const last = count % 10;
+      if (last === 1 && lastTwo !== 11) return `${count} sentencija`;
+      if (last >= 2 && last <= 4 && (lastTwo < 12 || lastTwo > 14)) return `${count} sentencije`;
+      return `${count} sentencija`;
+    }
+
+    function apply(): void {
+      const query = fold(input!.value.trim());
+      let shown = 0;
+
+      items.forEach((item, index) => {
+        const match = query === '' || haystacks[index].includes(query);
+        item.hidden = !match;
+        if (match) shown += 1;
+      });
+
+      empty!.classList.toggle('hidden', shown > 0);
+
+      // Silent at rest: a count on an untouched page would be noise.
+      status!.textContent = query === '' ? '' : `Pronađeno ${countLabel(shown)}.`;
+    }
+
+    input.addEventListener('input', apply);
+    apply();
+  }
+
+  initSententiaeSearch();
+</script>
