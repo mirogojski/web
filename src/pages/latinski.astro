@@ -168,26 +168,18 @@ const sententiae: Sententia[] = [
       </p>
     </header>
 
-    <ol class="space-y-4" data-animate="fade">
-      {
-        sententiae.map((item, index) => (
-          <li class="rounded-lg border bg-card p-6 hover:shadow-lg transition-shadow">
-            <div class="flex items-start gap-4">
-              <span
-                class="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-muted text-sm font-semibold text-muted-foreground"
-                aria-hidden="true"
-              >
-                {index + 1}
-              </span>
-              <div class="min-w-0">
-                <p class="text-lg md:text-xl font-semibold text-foreground italic">{item.latin}</p>
-                <p class="text-muted-foreground mt-2">{item.translation}</p>
-                <p class="text-sm text-muted-foreground/80 mt-3">{item.source}</p>
-              </div>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
+    <div class="rounded-lg border bg-card" data-animate="fade">
+      <ul class="divide-y">
+        {
+          sententiae.map((item) => (
+            <li class="p-6 md:p-8">
+              <p class="text-lg md:text-xl font-semibold text-foreground italic">{item.latin}</p>
+              <p class="text-muted-foreground mt-2">{item.translation}</p>
+              <p class="text-sm text-muted-foreground/80 mt-3">{item.source}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </BaseLayout>
