@@ -2,154 +2,154 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 interface Sententia {
-  /** The Latin sentence */
+  /** Latinska sentencija */
   latin: string;
-  /** English translation */
+  /** Prijevod na hrvatski */
   translation: string;
-  /** Author or source, where reliably attributable */
+  /** Autor ili izvor, gdje je pouzdano pripisiv */
   source: string;
 }
 
 const sententiae: Sententia[] = [
   {
     latin: 'Carpe diem.',
-    translation: 'Seize the day.',
-    source: 'Horace, Odes 1.11',
+    translation: 'Iskoristi dan.',
+    source: 'Horacije, Ode 1.11',
   },
   {
     latin: 'Cogito, ergo sum.',
-    translation: 'I think, therefore I am.',
-    source: 'Rene Descartes',
+    translation: 'Mislim, dakle jesam.',
+    source: 'René Descartes',
   },
   {
     latin: 'Veni, vidi, vici.',
-    translation: 'I came, I saw, I conquered.',
-    source: 'Julius Caesar',
+    translation: 'Dođoh, vidjeh, pobijedih.',
+    source: 'Julije Cezar',
   },
   {
     latin: 'Alea iacta est.',
-    translation: 'The die is cast.',
-    source: 'Attributed to Caesar by Suetonius',
+    translation: 'Kocka je bačena.',
+    source: 'Cezaru pripisuje Svetonije',
   },
   {
     latin: 'Errare humanum est.',
-    translation: 'To err is human.',
-    source: 'Proverbial, after Seneca',
+    translation: 'Ljudski je griješiti.',
+    source: 'Poslovično, po Seneki',
   },
   {
     latin: 'Festina lente.',
-    translation: 'Make haste slowly.',
-    source: 'Motto of Augustus, via Suetonius',
+    translation: 'Hiti polako.',
+    source: 'Augustova deviza, preko Svetonija',
   },
   {
     latin: 'Memento mori.',
-    translation: 'Remember that you must die.',
-    source: 'Classical maxim',
+    translation: 'Sjeti se da ćeš umrijeti.',
+    source: 'Klasična izreka',
   },
   {
     latin: 'Dum spiro, spero.',
-    translation: 'While I breathe, I hope.',
-    source: 'Classical maxim',
+    translation: 'Dok dišem, nadam se.',
+    source: 'Klasična izreka',
   },
   {
     latin: 'Scientia potentia est.',
-    translation: 'Knowledge is power.',
-    source: 'Associated with Francis Bacon',
+    translation: 'Znanje je moć.',
+    source: 'Povezuje se s Francisom Baconom',
   },
   {
     latin: 'Audentes fortuna iuvat.',
-    translation: 'Fortune favours the bold.',
-    source: 'Virgil, Aeneid 10',
+    translation: 'Odvažnima sreća pomaže.',
+    source: 'Vergilije, Eneida 10',
   },
   {
     latin: 'Per aspera ad astra.',
-    translation: 'Through hardships to the stars.',
-    source: 'Proverbial',
+    translation: 'Preko trnja do zvijezda.',
+    source: 'Poslovično',
   },
   {
     latin: 'Vox populi, vox Dei.',
-    translation: 'The voice of the people is the voice of God.',
-    source: 'Medieval proverb',
+    translation: 'Glas naroda, glas Božji.',
+    source: 'Srednjovjekovna poslovica',
   },
   {
     latin: 'Tempus fugit.',
-    translation: 'Time flies.',
-    source: 'Virgil, Georgics 3',
+    translation: 'Vrijeme bježi.',
+    source: 'Vergilije, Georgike 3',
   },
   {
     latin: 'In vino veritas.',
-    translation: 'In wine there is truth.',
-    source: 'Proverbial',
+    translation: 'U vinu je istina.',
+    source: 'Poslovično',
   },
   {
     latin: 'Ars longa, vita brevis.',
-    translation: 'Art is long, life is short.',
-    source: 'Hippocrates, via Seneca',
+    translation: 'Umjetnost je dugotrajna, život kratak.',
+    source: 'Hipokrat, preko Seneke',
   },
   {
     latin: 'Divide et impera.',
-    translation: 'Divide and rule.',
-    source: 'Political maxim',
+    translation: 'Podijeli pa vladaj.',
+    source: 'Politička izreka',
   },
   {
     latin: 'Homo homini lupus.',
-    translation: 'Man is a wolf to man.',
-    source: 'After Plautus, Asinaria',
+    translation: 'Čovjek je čovjeku vuk.',
+    source: 'Po Plautu, Asinaria',
   },
   {
     latin: 'Nosce te ipsum.',
-    translation: 'Know thyself.',
-    source: 'Latin rendering of the Delphic maxim',
+    translation: 'Spoznaj samoga sebe.',
+    source: 'Latinski prijevod delfske izreke',
   },
   {
     latin: 'Sapere aude.',
-    translation: 'Dare to be wise.',
-    source: 'Horace, Epistles 1.2',
+    translation: 'Odvaži se biti mudar.',
+    source: 'Horacije, Pisma 1.2',
   },
   {
     latin: 'Amor vincit omnia.',
-    translation: 'Love conquers all.',
-    source: 'Virgil, Eclogues 10',
+    translation: 'Ljubav sve pobjeđuje.',
+    source: 'Vergilije, Ekloge 10',
   },
   {
     latin: 'Si vis pacem, para bellum.',
-    translation: 'If you want peace, prepare for war.',
-    source: 'After Vegetius',
+    translation: 'Želiš li mir, pripremaj se za rat.',
+    source: 'Po Vegeciju',
   },
   {
     latin: 'Acta non verba.',
-    translation: 'Deeds, not words.',
-    source: 'Proverbial',
+    translation: 'Djela, ne riječi.',
+    source: 'Poslovično',
   },
   {
     latin: 'Verba volant, scripta manent.',
-    translation: 'Spoken words fly away, written words remain.',
-    source: 'Proverbial',
+    translation: 'Izgovorene riječi lete, zapisane ostaju.',
+    source: 'Poslovično',
   },
   {
     latin: 'Nemo iudex in causa sua.',
-    translation: 'No one should be a judge in his own cause.',
-    source: 'Legal maxim',
+    translation: 'Nitko ne može biti sudac u svojoj stvari.',
+    source: 'Pravna izreka',
   },
   {
     latin: 'Dura lex, sed lex.',
-    translation: 'The law is harsh, but it is the law.',
-    source: 'Legal maxim',
+    translation: 'Zakon je strog, ali je zakon.',
+    source: 'Pravna izreka',
   },
   {
     latin: 'Mens sana in corpore sano.',
-    translation: 'A sound mind in a sound body.',
-    source: 'Juvenal, Satires 10',
+    translation: 'Zdrav duh u zdravu tijelu.',
+    source: 'Juvenal, Satire 10',
   },
   {
     latin: 'Non scholae sed vitae discimus.',
-    translation: 'We learn not for school, but for life.',
-    source: 'After Seneca, Epistles 106',
+    translation: 'Ne učimo za školu, nego za život.',
+    source: 'Po Seneki, Pisma 106',
   },
   {
     latin: 'Fiat lux.',
-    translation: 'Let there be light.',
-    source: 'Vulgate, Genesis 1:3',
+    translation: 'Neka bude svjetlost.',
+    source: 'Vulgata, Knjiga Postanka 1,3',
   },
 ];
 ---
