@@ -19,7 +19,7 @@ const { page } = Astro.props;
 
 // Format date helper
 function formatDate(date: Date) {
-  return new Date(date).toLocaleDateString('en-US', {
+  return new Date(date).toLocaleDateString('hr-HR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -29,15 +29,16 @@ function formatDate(date: Date) {
 
 <BaseLayout
   title="Blog"
-  description="Articles, tutorials, and thoughts on web development with Astro, React, and modern web technologies"
+  description="Zapisi o Mirogoju — o ljudima koji tu počivaju, o Bolléovim arkadama i o groblju koje je od 1876. zajedničko počivalište pet vjera."
 >
   <div class="container max-w-4xl mx-auto py-20">
     <div class="mb-20">
       <h1 class="text-7xl font-bold tracking-tight mb-8">Blog</h1>
       <p class="text-xl text-muted-foreground">
-        Where ancient monsters navigate modern bureaucracy, mythical creatures struggle with
-        technology, and the supernatural discovers that HOA violations are scarier than
-        dragonslayers.
+        Zapisi o ljudima čija su imena na mirogojskim grobovima — pjesnicima, piscima, arhitektima,
+        znanstvenicima i sportašima — i o samome groblju: o Bolléovim arkadama i o odluci iz 1876.
+        da Mirogoj bude zajedničko počivalište pet vjera. Pokraj tih grobova prolazili smo svaki dan
+        na putu u školu.
       </p>
     </div>
 
@@ -86,7 +87,7 @@ function formatDate(date: Date) {
               >
                 <path d="m15 18-6-6 6-6" />
               </svg>
-              <span>Previous</span>
+              <span>Novije</span>
             </a>
           ) : (
             <div />
@@ -94,7 +95,7 @@ function formatDate(date: Date) {
 
           <div class="flex items-center gap-2 text-sm text-muted-foreground">
             <span>
-              Page {page.currentPage} of {page.lastPage}
+              Stranica {page.currentPage} od {page.lastPage}
             </span>
           </div>
 
@@ -103,7 +104,7 @@ function formatDate(date: Date) {
               href={page.url.next}
               class="group flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors"
             >
-              <span>Next</span>
+              <span>Starije</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
