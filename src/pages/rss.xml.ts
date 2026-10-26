@@ -17,7 +17,7 @@ export async function GET(context: import('astro').APIContext) {
       link: `/blog/${post.id}/`,
     })),
     customData: `<language>hr</language>
-<managingEditor>kontakt@mirogoj.com (Nikola Pejdo)</managingEditor>
-<webMaster>kontakt@mirogoj.com (Nikola Pejdo)</webMaster>`,
+<managingEditor>nikola@mirogoj.com (Nikola Pejdo)</managingEditor>
+<webMaster>nikola@mirogoj.com (Nikola Pejdo)</webMaster>`,
   });
 }

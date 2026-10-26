@@ -35,3 +35,7 @@ system/reports/*.md
 
 # Claude Code local settings (per-developer, not shipped)
 .claude/settings.local.json
+
+# Cloudflare local secrets (wrangler)
+.dev.vars
+.wrangler/

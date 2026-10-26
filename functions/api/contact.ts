@@ -11,7 +11,7 @@
  *
  * Required environment variables (Cloudflare dashboard, not committed):
  *   RESEND_API_KEY   Resend API key (secret)
- *   CONTACT_TO       Recipient address, e.g. kontakt@mirogoj.com
+ *   CONTACT_TO       Recipient address, e.g. nikola@mirogoj.com
  *   CONTACT_FROM     Verified sender on a domain you own, e.g. web@mirogoj.com
  *
  * Notes on the security posture:

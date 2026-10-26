@@ -33,9 +33,15 @@ i video prikazuju kratku napomenu umjesto sadržaja.
 |---|---|
 | `PUBLIC_GOOGLE_PHOTOS_ALBUM_URL` | javno podijeljeni Google Photos album za `/fotos` |
 | `PUBLIC_VIMEO_VIDEO_URL` | Vimeo poveznica za `/video` |
-| `PUBLIC_CONTACT_FORM_ENDPOINT` | odredište obrasca; prazno znači `mailto:` |
+| `PUBLIC_CONTACT_FORM_ENDPOINT` | vanjsko odredište obrasca; prazno znači `/api/contact` |
 
-Za obrazac koji šalje e-poštu preko `functions/api/contact.ts` potrebni su
-`RESEND_API_KEY`, `CONTACT_TO` i `CONTACT_FROM`, postavljeni u nadzornoj ploči
-hostinga. Funkcija radi samo na Cloudflare Pages, ne na Workeru sa statičkim
-sadržajem.
+Obrazac šalje e-poštu preko `functions/api/contact.ts` kroz Resend. Worker
+(`worker/index.ts`, `wrangler.jsonc`) usmjerava `/api/contact` na tu funkciju.
+`CONTACT_TO` i `CONTACT_FROM` su u `wrangler.jsonc`; `RESEND_API_KEY` je tajna i
+postavlja se u Cloudflare nadzornoj ploči (Worker → Settings → Variables and
+Secrets), a lokalno u `.dev.vars` (ne ide u git):
+
+```bash
+echo 'RESEND_API_KEY=re_...' > .dev.vars
+npm run preview:worker   # gradi stranicu i pokreće Worker na http://localhost:8787
+```
