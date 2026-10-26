@@ -15,6 +15,14 @@ import Contact from '@/components/sections/Contact.astro';
 const formEndpoint = import.meta.env.PUBLIC_CONTACT_FORM_ENDPOINT || '/api/contact';
 const contactEmail = 'nikola@mirogoj.com';
 
+/**
+ * Turnstile site key for the bot check. Public by design; the matching secret
+ * is TURNSTILE_SECRET_KEY on the Worker. PUBLIC_TURNSTILE_SITE_KEY overrides it,
+ * e.g. with Cloudflare's always-pass test key for local runs.
+ */
+const turnstileSiteKey =
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAAFnA1Tr_Hi69g2ux';
+
 /** A mailto: submission cannot report a result, so banners need a real endpoint. */
 const usesEndpoint = Boolean(formEndpoint);
 
@@ -36,6 +44,12 @@ const banners = [
     tone: 'error',
     title: 'Poruka nije poslana.',
     body: 'Provjerite ime, ispravnost e-mail adrese i tekst poruke, pa pokušajte ponovno.',
+  },
+  {
+    key: 'captcha',
+    tone: 'error',
+    title: 'Poruka nije poslana.',
+    body: 'Provjera da niste robot nije uspjela. Pričekajte trenutak pa pošaljite ponovno; ako se pojavi okvir za potvrdu, kliknite ga.',
   },
   {
     key: 'error',
@@ -79,6 +93,7 @@ const banners = [
     email={contactEmail}
     formAction={formEndpoint ?? `mailto:${contactEmail}`}
     formSubject="Nova poruka s web stranice"
+    turnstileSiteKey={turnstileSiteKey}
   />
 </BaseLayout>
 

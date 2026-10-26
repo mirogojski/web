@@ -15,6 +15,11 @@ interface Props {
   formSubject?: string;
   /** Absolute URL the visitor is redirected to after a successful submit */
   successUrl?: string;
+  /**
+   * Cloudflare Turnstile site key. When set, the form shows the Turnstile
+   * check and the handler must verify its token.
+   */
+  turnstileSiteKey?: string;
 }
 
 const {
@@ -26,6 +31,7 @@ const {
   formAction,
   formSubject = 'New message from the website contact form',
   successUrl,
+  turnstileSiteKey,
 } = Astro.props;
 
 const hasContactInfo = email || phone || address;
@@ -240,6 +246,12 @@ const formEnctype = isMailto ? 'text/plain' : undefined;
               ></textarea>
             </div>
 
+            {
+              turnstileSiteKey && !isMailto && (
+                <div data-turnstile data-sitekey={turnstileSiteKey} hidden />
+              )
+            }
+
             <!-- Required field note -->
             <p class="text-xs text-muted-foreground">
               <span class="text-destructive" aria-hidden="true">*</span> Obavezna polja
@@ -258,3 +270,60 @@ const formEnctype = isMailto ? 'text/plain' : undefined;
     </div>
   </div>
 </section>
+
+<script>
+  /**
+   * Renders the Turnstile check. The site navigates with Astro's ClientRouter,
+   * so Turnstile's automatic rendering would only run on a full page load; this
+   * loads the API once and renders the widget on every visit to the form.
+   *
+   * The check runs invisibly. Its container stays hidden, taking no space in the
+   * form, unless Cloudflare asks the visitor to click.
+   */
+  interface Turnstile {
+    render(
+      container: HTMLElement,
+      options: {
+        sitekey: string;
+        language?: string;
+        appearance?: 'always' | 'execute' | 'interaction-only';
+        'before-interactive-callback'?: () => void;
+        'after-interactive-callback'?: () => void;
+      }
+    ): string;
+  }
+
+  const TURNSTILE_API = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+
+  function renderTurnstile(): void {
+    const container = document.querySelector<HTMLElement>('[data-turnstile]');
+    const turnstile = (window as { turnstile?: Turnstile }).turnstile;
+    if (!container?.dataset.sitekey || container.childElementCount > 0 || !turnstile) return;
+
+    turnstile.render(container, {
+      sitekey: container.dataset.sitekey,
+      language: 'hr',
+      appearance: 'interaction-only',
+      'before-interactive-callback': () => container.removeAttribute('hidden'),
+      'after-interactive-callback': () => container.setAttribute('hidden', ''),
+    });
+  }
+
+  function mountTurnstile(): void {
+    if (!document.querySelector('[data-turnstile]')) return;
+
+    if (document.querySelector('script[data-turnstile-api]')) {
+      renderTurnstile();
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = TURNSTILE_API;
+    script.async = true;
+    script.dataset.turnstileApi = '';
+    script.addEventListener('load', renderTurnstile);
+    document.head.append(script);
+  }
+
+  document.addEventListener('astro:page-load', mountTurnstile);
+</script>

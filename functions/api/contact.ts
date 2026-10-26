@@ -13,11 +13,14 @@
  *   RESEND_API_KEY   Resend API key (secret)
  *   CONTACT_TO       Recipient address, e.g. nikola@mirogoj.com
  *   CONTACT_FROM     Verified sender on a domain you own, e.g. web@mirogoj.com
+ *   TURNSTILE_SECRET_KEY  Cloudflare Turnstile secret for the form's widget
  *
  * Notes on the security posture:
  * - The API key lives only in the environment; it is never sent to the browser.
  * - Submissions are rate limited per IP to blunt automated abuse.
  * - A honeypot field catches naive bots without inconveniencing real visitors.
+ * - Every submission must carry a Turnstile token that Cloudflare confirms,
+ *   which stops scripted posts that never load the page.
  * - All submitted values are treated as untrusted: they are length-capped, and
  *   escaped before being placed in the HTML body of the mail.
  * - The visitor's address goes in Reply-To, never in From, so the message
@@ -28,6 +31,7 @@ interface Env {
   RESEND_API_KEY: string;
   CONTACT_TO: string;
   CONTACT_FROM: string;
+  TURNSTILE_SECRET_KEY: string;
   /** Optional KV namespace for rate limiting. Omitted: limiting is skipped. */
   CONTACT_RATELIMIT?: RateLimitStore;
 }
@@ -55,6 +59,9 @@ const LIMITS = {
   subject: 200,
   message: 5000,
 } as const;
+
+/** Cloudflare's endpoint for checking a Turnstile token server-side. */
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
 /** Max submissions allowed from one IP within the window. */
 const RATE_LIMIT = { max: 5, windowSeconds: 3600 };
@@ -112,7 +119,7 @@ function json(body: unknown, status: number): Response {
  * Redirects back to the contact page with a status flag, for normal (non-JS)
  * form submissions. The flag drives the message shown to the visitor.
  */
-function redirectTo(request: Request, status: 'ok' | 'error' | 'invalid'): Response {
+function redirectTo(request: Request, status: 'ok' | 'error' | 'invalid' | 'captcha'): Response {
   const url = new URL(request.url);
   const target = new URL('/contact', url.origin);
   target.searchParams.set('poruka', status);
@@ -142,6 +149,32 @@ async function isRateLimited(env: Env, ip: string): Promise<boolean> {
   }
 }
 
+/**
+ * Asks Cloudflare whether the Turnstile token from the form is genuine. Each
+ * token is single use, so a replayed one fails too. Any failure to reach
+ * Cloudflare counts as a failed check: the form fails closed.
+ */
+async function passesTurnstile(secret: string, token: string, ip: string): Promise<boolean> {
+  if (!token) return false;
+
+  const body = new FormData();
+  body.append('secret', secret);
+  body.append('response', token);
+  if (ip) body.append('remoteip', ip);
+
+  try {
+    const response = await fetch(TURNSTILE_VERIFY_URL, {
+      method: 'POST',
+      body,
+      signal: AbortSignal.timeout(10_000),
+    });
+    const result = (await response.json()) as { success?: boolean };
+    return result.success === true;
+  } catch {
+    return false;
+  }
+}
+
 /** Reads and validates the form fields. Returns null when input is unusable. */
 function readFields(form: FormData): ContactFields | null {
   const get = (key: string, limit: number): string =>
@@ -162,11 +195,13 @@ function readFields(form: FormData): ContactFields | null {
 export const onRequestPost: PagesFunctionHandler = async ({ request, env }) => {
   // Prefer a JSON reply when the form was submitted by fetch().
   const wantsJson = (request.headers.get('accept') ?? '').includes('application/json');
-  const fail = (status: 'error' | 'invalid', httpStatus: number, detail: string) =>
+  const fail = (status: 'error' | 'invalid' | 'captcha', httpStatus: number, detail: string) =>
     wantsJson ? json({ ok: false, error: detail }, httpStatus) : redirectTo(request, status);
 
-  if (!env.RESEND_API_KEY || !env.CONTACT_TO || !env.CONTACT_FROM) {
-    console.error('[contact] Missing RESEND_API_KEY, CONTACT_TO or CONTACT_FROM.');
+  if (!env.RESEND_API_KEY || !env.CONTACT_TO || !env.CONTACT_FROM || !env.TURNSTILE_SECRET_KEY) {
+    console.error(
+      '[contact] Missing RESEND_API_KEY, CONTACT_TO, CONTACT_FROM or TURNSTILE_SECRET_KEY.'
+    );
     return fail('error', 500, 'Server nije konfiguriran.');
   }
 
@@ -194,6 +229,13 @@ export const onRequestPost: PagesFunctionHandler = async ({ request, env }) => {
   }
 
   const ip = request.headers.get('cf-connecting-ip') ?? '';
+
+  // Checked before the rate limit, so failed bot attempts do not spend KV writes.
+  const token = String(form.get('cf-turnstile-response') ?? '');
+  if (!(await passesTurnstile(env.TURNSTILE_SECRET_KEY, token, ip))) {
+    return fail('captcha', 403, 'Provjera nije uspjela. Pokušajte ponovno.');
+  }
+
   if (await isRateLimited(env, ip)) {
     return fail('error', 429, 'Previše poruka. Pokušajte kasnije.');
   }
