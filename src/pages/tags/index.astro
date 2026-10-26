@@ -22,18 +22,18 @@ tagsWithCounts.sort((a, b) => a.tag.localeCompare(b.tag));
   title="Oznake"
   description="Zapisi o Mirogoju po temama — arhitektura, književnost, povijest, umjetnost, znanost, sport."
 >
-  <div class="container max-w-4xl mx-auto py-16">
-    <div class="mb-16">
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Oznake</h1>
+  <div class="container max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+    <div class="mb-16 max-w-3xl">
+      <h1 class="font-serif-display text-3xl md:text-4xl mb-4">Oznake</h1>
       <p class="text-lg text-muted-foreground">Zapisi po temama.</p>
     </div>
 
-    <div class="flex flex-wrap gap-4">
+    <div class="flex flex-wrap gap-3 sm:gap-4 max-w-3xl">
       {
         tagsWithCounts.map(({ tag, count }) => (
           <a
             href={`/tags/${tag}`}
-            class="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-card hover:bg-accent hover:border-primary transition-all"
+            class="group inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-border bg-card hover:bg-accent hover:border-primary transition-all"
           >
             <span class="text-lg font-medium group-hover:text-primary transition-colors">
               {tag}

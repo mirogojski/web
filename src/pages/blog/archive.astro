@@ -20,15 +20,15 @@ function formatDate(date: Date) {
   title="Arhiva"
   description="Svi zapisi o Mirogoju, poredani od najnovijega prema najstarijemu."
 >
-  <div class="container max-w-4xl mx-auto py-16">
-    <div class="mb-16">
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Arhiva</h1>
+  <div class="container max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+    <div class="mb-16 max-w-3xl">
+      <h1 class="font-serif-display text-3xl md:text-4xl mb-4">Arhiva</h1>
       <p class="text-lg text-muted-foreground">
         Svi zapisi na jednome mjestu, od najnovijega prema najstarijemu.
       </p>
     </div>
 
-    <ul class="space-y-6">
+    <ul class="space-y-6 max-w-3xl">
       {
         sortedPosts.map((post) => (
           <li>
@@ -40,7 +40,7 @@ function formatDate(date: Date) {
                 >
                   {formatDate(post.data.pubDate)}
                 </time>
-                <h2 class="text-xl font-bold group-hover:text-primary transition-colors">
+                <h2 class="font-serif-display text-xl group-hover:text-primary transition-colors">
                   {post.data.title}
                 </h2>
               </div>

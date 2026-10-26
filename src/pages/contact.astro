@@ -20,8 +20,7 @@ const contactEmail = 'nikola@mirogoj.com';
  * is TURNSTILE_SECRET_KEY on the Worker. PUBLIC_TURNSTILE_SITE_KEY overrides it,
  * e.g. with Cloudflare's always-pass test key for local runs.
  */
-const turnstileSiteKey =
-  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAAFnA1Tr_Hi69g2ux';
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAAFnA1Tr_Hi69g2ux';
 
 /** A mailto: submission cannot report a result, so banners need a real endpoint. */
 const usesEndpoint = Boolean(formEndpoint);
@@ -66,7 +65,7 @@ const banners = [
 >
   {
     usesEndpoint && (
-      <div class="container max-w-5xl mx-auto px-6">
+      <div class="container max-w-5xl mx-auto px-4 sm:px-6">
         {banners.map((banner) => (
           <div
             data-poruka={banner.key}

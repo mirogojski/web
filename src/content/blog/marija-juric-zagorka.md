@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['književnost', 'Mirogoj', 'povijest']
 ---
 
-# Marija Jurić Zagorka — prva hrvatska profesionalna novinarka
-
 Zagorka je bila najčitanija hrvatska pisateljica svojega vremena i prva žena koja je u Hrvatskoj od novinarstva živjela — oboje uz otpor koji danas nije lako zamisliti.
 
 ## Put do redakcije

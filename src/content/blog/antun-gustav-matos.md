@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['književnost', 'Mirogoj', 'pjesnici']
 ---
 
-# Antun Gustav Matoš — pjesnik Notturna na mirogojskim arkadama
-
 Za mnoge koji su pokraj Mirogoja prolazili na putu u školu, Matoš je bio prvo ime s tog groblja koje su naučili — jer su njegove stihove učili napamet u istoj toj školi.
 
 ## Nemiran život

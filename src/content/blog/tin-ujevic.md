@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['književnost', 'Mirogoj', 'pjesnici']
 ---
 
-# Tin Ujević — pjesnik Svakidašnje jadikovke
-
 Augustin Ujević, kojega svi znaju kao Tina, jedan je od najvećih hrvatskih pjesnika dvadesetoga stoljeća — i jedan od onih koji su živjeli najteže.
 
 ## Život bez adrese

@@ -69,9 +69,9 @@ const photos = remotePhotos.length > 0 ? remotePhotos : localPhotos;
   title="Fotografije"
   description="Galerija — fotografije i crteži iz albuma Sus Minervam docet."
 >
-  <section class="pt-12 pb-6 md:pt-16 md:pb-8 px-6">
+  <section class="pt-12 pb-6 md:pt-16 md:pb-8 px-4 sm:px-6">
     <div class="container max-w-3xl mx-auto text-center" data-animate>
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Fotografije</h1>
+      <h1 class="font-serif-display text-3xl md:text-4xl">Fotografije</h1>
     </div>
   </section>
 
@@ -88,7 +88,7 @@ const photos = remotePhotos.length > 0 ? remotePhotos : localPhotos;
       />
     ) : (
       <section class="pb-20 px-6">
-        <div class="container max-w-2xl mx-auto rounded-xl border bg-card p-8 text-center">
+        <div class="container max-w-2xl mx-auto rounded-xl border bg-card p-6 sm:p-8 text-center">
           <h2 class="text-xl font-semibold">Album još nije povezan</h2>
           <p class="mt-3 text-sm text-muted-foreground leading-relaxed">
             Postavite <code class="font-mono">PUBLIC_GOOGLE_PHOTOS_ALBUM_URL</code> na javno

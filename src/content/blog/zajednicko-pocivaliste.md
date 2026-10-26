@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['Mirogoj', 'povijest', 'arhitektura']
 ---
 
-# Mirogoj kao zajedničko počivalište — pet vjera na jednome groblju
-
 Kad je Mirogoj 1876. otvoren, otvoren je kao zajedničko gradsko groblje. To je odluka koja ga je obilježila više od bilo koje pojedinačne građevine na njemu.
 
 ## Odluka

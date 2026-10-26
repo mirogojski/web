@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['znanost', 'Mirogoj', 'povijest']
 ---
 
-# Vladimir Prelog — nobelovac sa zagrebačkom adresom
-
 Među imenima na Mirogoju je i dobitnik Nobelove nagrade za kemiju.
 
 ## Sarajevo, Zagreb, Prag

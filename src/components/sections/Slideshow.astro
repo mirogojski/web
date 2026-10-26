@@ -90,7 +90,8 @@ const {
 
 const imageFitClass = fit === 'contain' ? 'object-contain' : 'object-cover';
 const stageClass = stage === 'canvas' ? 'bg-image-canvas' : 'bg-muted';
-const sectionSpacingClass = spacing === 'tight' ? 'pb-16 md:pb-24 px-6' : 'py-16 md:py-24 px-6';
+const sectionSpacingClass =
+  spacing === 'tight' ? 'pb-16 md:pb-24 px-4 sm:px-6' : 'py-16 md:py-24 px-4 sm:px-6';
 
 // A unique id per instance keeps multiple slideshows on one page independent.
 const uid = `slideshow-${Math.random().toString(36).slice(2, 9)}`;

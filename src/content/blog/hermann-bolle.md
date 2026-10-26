@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['arhitektura', 'Mirogoj', 'povijest']
 ---
 
-# Hermann Bollé — arhitekt koji je Mirogoj oblikovao i na njemu ostao
-
 Malo je arhitekata čije djelo i grob stoje na istome mjestu. Hermann Bollé jedan je od njih: projektirao je mirogojske arkade, a pokopan je unutar sklopa koji je sam zamislio.
 
 ## Došljak koji je ostao

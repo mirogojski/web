@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['povijest', 'Mirogoj', 'jezik']
 ---
 
-# Ljudevit Gaj — čovjek s čijega je posjeda nastao Mirogoj
-
 Veza između Ljudevita Gaja i Mirogoja neposredna je: groblje je nastalo na zemljištu koje je bilo njegov posjed.
 
 ## Ilirski pokret

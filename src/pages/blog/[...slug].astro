@@ -38,7 +38,7 @@ function formatDate(date: Date) {
 
 <BaseLayout title={post.data.title} description={post.data.description}>
   <article class="pb-12">
-    <div class="container max-w-3xl mx-auto pt-12 mb-8">
+    <div class="container max-w-5xl mx-auto px-4 sm:px-6 pt-12 mb-8">
       <a
         href="/blog"
         class="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -62,36 +62,38 @@ function formatDate(date: Date) {
     </div>
 
     <header class="mb-12">
-      <div class="container max-w-3xl mx-auto mb-8 space-y-4">
-        <h1 class="text-4xl md:text-5xl font-bold tracking-tight">{post.data.title}</h1>
+      <div class="container max-w-5xl mx-auto px-4 sm:px-6 mb-8">
+        <div class="max-w-3xl space-y-4">
+          <h1 class="font-serif-display text-3xl md:text-4xl">{post.data.title}</h1>
 
-        <p class="text-lg text-muted-foreground">{post.data.description}</p>
+          <p class="text-lg text-muted-foreground">{post.data.description}</p>
 
-        <div class="flex items-center gap-4 text-sm text-muted-foreground pt-2">
-          <time datetime={post.data.pubDate.toISOString()}>
-            {formatDate(post.data.pubDate)}
-          </time>
-          <span>•</span>
-          <span>{post.data.author}</span>
+          <div class="flex items-center gap-4 text-sm text-muted-foreground pt-2">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatDate(post.data.pubDate)}
+            </time>
+            <span>•</span>
+            <span>{post.data.author}</span>
+          </div>
+
+          {
+            post.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2 pt-2">
+                {post.data.tags.map((tag) => (
+                  <a
+                    href={`/tags/${tag}`}
+                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            )
+          }
         </div>
-
-        {
-          post.data.tags.length > 0 && (
-            <div class="flex flex-wrap gap-2 pt-2">
-              {post.data.tags.map((tag) => (
-                <a
-                  href={`/tags/${tag}`}
-                  class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
-                >
-                  {tag}
-                </a>
-              ))}
-            </div>
-          )
-        }
       </div>
 
-      <div class="container max-w-5xl mx-auto">
+      <div class="container max-w-5xl mx-auto px-4 sm:px-6">
         <div
           class="w-full aspect-[4/3] bg-gradient-to-br from-primary/20 via-primary/10 to-transparent relative overflow-hidden rounded-lg"
         >
@@ -123,69 +125,73 @@ function formatDate(date: Date) {
       </div>
     </header>
 
-    <div class="container max-w-3xl mx-auto">
-      <div class="prose prose-neutral dark:prose-invert max-w-none">
-        <Content />
-      </div>
+    <div class="container max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl">
+        <div
+          class="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:font-semibold"
+        >
+          <Content />
+        </div>
 
-      <footer class="mt-12 pt-8 border-t">
-        <nav class="flex items-center justify-between gap-8">
-          {
-            prevPost ? (
-              <a href={`/blog/${prevPost.id}`} class="group flex-1 text-left">
-                <div class="text-xs text-muted-foreground mb-1">Stariji zapis</div>
-                <div class="text-sm font-medium group-hover:text-primary transition-colors">
-                  {prevPost.data.title}
-                </div>
-              </a>
-            ) : (
-              <div class="flex-1" />
-            )
-          }
+        <footer class="mt-12 pt-8 border-t">
+          <nav class="flex items-center justify-between gap-4 sm:gap-8">
+            {
+              prevPost ? (
+                <a href={`/blog/${prevPost.id}`} class="group flex-1 text-left">
+                  <div class="text-xs text-muted-foreground mb-1">Stariji zapis</div>
+                  <div class="text-sm font-medium group-hover:text-primary transition-colors">
+                    {prevPost.data.title}
+                  </div>
+                </a>
+              ) : (
+                <div class="flex-1" />
+              )
+            }
 
-          <a
-            href="/blog"
-            class="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="mr-2"
+            <a
+              href="/blog"
+              class="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
             >
-              <rect width="3" height="3" x="3" y="3" rx="1"></rect>
-              <rect width="3" height="3" x="10" y="3" rx="1"></rect>
-              <rect width="3" height="3" x="17" y="3" rx="1"></rect>
-              <rect width="3" height="3" x="3" y="10" rx="1"></rect>
-              <rect width="3" height="3" x="10" y="10" rx="1"></rect>
-              <rect width="3" height="3" x="17" y="10" rx="1"></rect>
-              <rect width="3" height="3" x="3" y="17" rx="1"></rect>
-              <rect width="3" height="3" x="10" y="17" rx="1"></rect>
-              <rect width="3" height="3" x="17" y="17" rx="1"></rect>
-            </svg>
-            Svi zapisi
-          </a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="mr-2"
+              >
+                <rect width="3" height="3" x="3" y="3" rx="1"></rect>
+                <rect width="3" height="3" x="10" y="3" rx="1"></rect>
+                <rect width="3" height="3" x="17" y="3" rx="1"></rect>
+                <rect width="3" height="3" x="3" y="10" rx="1"></rect>
+                <rect width="3" height="3" x="10" y="10" rx="1"></rect>
+                <rect width="3" height="3" x="17" y="10" rx="1"></rect>
+                <rect width="3" height="3" x="3" y="17" rx="1"></rect>
+                <rect width="3" height="3" x="10" y="17" rx="1"></rect>
+                <rect width="3" height="3" x="17" y="17" rx="1"></rect>
+              </svg>
+              Svi zapisi
+            </a>
 
-          {
-            nextPost ? (
-              <a href={`/blog/${nextPost.id}`} class="group flex-1 text-right">
-                <div class="text-xs text-muted-foreground mb-1">Noviji zapis</div>
-                <div class="text-sm font-medium group-hover:text-primary transition-colors">
-                  {nextPost.data.title}
-                </div>
-              </a>
-            ) : (
-              <div class="flex-1" />
-            )
-          }
-        </nav>
-      </footer>
+            {
+              nextPost ? (
+                <a href={`/blog/${nextPost.id}`} class="group flex-1 text-right">
+                  <div class="text-xs text-muted-foreground mb-1">Noviji zapis</div>
+                  <div class="text-sm font-medium group-hover:text-primary transition-colors">
+                    {nextPost.data.title}
+                  </div>
+                </a>
+              ) : (
+                <div class="flex-1" />
+              )
+            }
+          </nav>
+        </footer>
+      </div>
     </div>
   </article>
 </BaseLayout>

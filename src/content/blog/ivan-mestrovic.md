@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['umjetnost', 'Mirogoj', 'povijest']
 ---
 
-# Ivan Meštrović — kipar čija djela stoje i na Mirogoju
-
 Mirogoj je i zbirka skulpture, a među kiparima zastupljenima na njegovim grobovima je i Ivan Meštrović — najpoznatije ime hrvatskoga kiparstva.
 
 ## Od Otavica do Beča

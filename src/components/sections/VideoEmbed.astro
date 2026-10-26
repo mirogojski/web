@@ -67,7 +67,8 @@ function displayTitle(video: VimeoVideo): string {
   return titles[video.id] ?? video.title;
 }
 
-const sectionSpacingClass = spacing === 'tight' ? 'pb-16 md:pb-24 px-6' : 'py-16 md:py-24 px-6';
+const sectionSpacingClass =
+  spacing === 'tight' ? 'pb-16 md:pb-24 px-4 sm:px-6' : 'py-16 md:py-24 px-4 sm:px-6';
 const gridClass = single ? 'grid gap-10' : 'grid gap-10 md:grid-cols-2';
 ---
 

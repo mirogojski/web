@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['književnost', 'Mirogoj', 'povijest']
 ---
 
-# Miroslav Krleža — pisac koji je Zagreb opisao bez milosti
-
 Ako se od hrvatske književnosti dvadesetoga stoljeća mora izdvojiti jedno ime, to je Krležino.
 
 ## Vojna škola, pa pisanje

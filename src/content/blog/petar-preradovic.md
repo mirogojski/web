@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['književnost', 'Mirogoj', 'pjesnici', 'povijest']
 ---
 
-# Petar Preradović — pjesnik koji je hrvatski jezik učio kao odrastao čovjek
-
 Preradovićeva je biografija neobična: jedan od najvažnijih hrvatskih pjesnika 19. stoljeća svoj je materinski jezik u zreloj dobi morao ponovno naučiti.
 
 ## Vojnička škola

@@ -8,103 +8,105 @@ import { pjesme } from '@/data/pjesme';
   title="Pjesme"
   description="Pjesme hrvatskih pjesnika, od kojih mnogi počivaju na Mirogoju — Matoš, Preradović, Ujević, Cesarić."
 >
-  <div class="container max-w-3xl mx-auto py-16 px-6">
-    <header class="mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Pjesme</h1>
-      <p class="text-lg text-muted-foreground">
-        Pjesme koje čine jezgru hrvatske pjesničke tradicije. Matoš, Preradović, Ujević i Cesarić
-        počivaju na Mirogoju — pokraj njihovih grobova prolazili smo na putu u školu, učeći u njoj
-        upravo ove stihove.
-      </p>
-    </header>
+  <div class="container max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+    <div class="max-w-3xl">
+      <header class="mb-12">
+        <h1 class="font-serif-display text-3xl md:text-4xl mb-4">Pjesme</h1>
+        <p class="text-lg text-muted-foreground">
+          Pjesme koje čine jezgru hrvatske pjesničke tradicije. Matoš, Preradović, Ujević i Cesarić
+          počivaju na Mirogoju — pokraj njihovih grobova prolazili smo na putu u školu, učeći u njoj
+          upravo ove stihove.
+        </p>
+      </header>
 
-    <ol class="space-y-6" data-animate="fade">
-      {
-        pjesme.map((pjesma, index) => (
-          <li class="rounded-lg border bg-card p-6 md:p-8">
-            <div class="flex items-start gap-4">
-              <span
-                class="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-muted text-sm font-semibold text-muted-foreground"
-                aria-hidden="true"
-              >
-                {index + 1}
-              </span>
-              <div class="min-w-0 flex-1">
-                <h2 class="text-lg md:text-xl font-semibold text-foreground">{pjesma.title}</h2>
-                <p class="text-sm text-muted-foreground mt-1">
-                  {pjesma.poet} <span aria-hidden="true">·</span> {pjesma.life}{' '}
-                  <span aria-hidden="true">·</span> {pjesma.year}
-                  {pjesma.collection && (
-                    <>
-                      {' '}
-                      <span aria-hidden="true">·</span> zbirka „{pjesma.collection}”
-                    </>
-                  )}
-                </p>
+      <ol class="space-y-6" data-animate="fade">
+        {
+          pjesme.map((pjesma, index) => (
+            <li class="rounded-lg border bg-card p-6 md:p-8">
+              <div class="flex items-start gap-4">
+                <span
+                  class="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-muted text-sm font-semibold text-muted-foreground"
+                  aria-hidden="true"
+                >
+                  {index + 1}
+                </span>
+                <div class="min-w-0 flex-1">
+                  <h2 class="text-lg md:text-xl font-semibold text-foreground">{pjesma.title}</h2>
+                  <p class="text-sm text-muted-foreground mt-1">
+                    {pjesma.poet} <span aria-hidden="true">·</span> {pjesma.life}{' '}
+                    <span aria-hidden="true">·</span> {pjesma.year}
+                    {pjesma.collection && (
+                      <>
+                        {' '}
+                        <span aria-hidden="true">·</span> zbirka „{pjesma.collection}”
+                      </>
+                    )}
+                  </p>
 
-                {pjesma.text ? (
-                  <details class="pjesma group mt-5">
-                    <summary class="inline-flex cursor-pointer items-center gap-1.5 rounded-md text-sm font-medium text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background py-1">
-                      <svg
-                        class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-open:rotate-90"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                      >
-                        <path d="M9 6l6 6-6 6" />
-                      </svg>
-                      <span class="group-open:hidden">Prikaži pjesmu</span>
-                      <span class="hidden group-open:inline">Sakrij pjesmu</span>
-                    </summary>
-                    <div class="pjesma-body overflow-hidden">
-                      <blockquote class="mt-4 border-l-2 border-primary/40 pl-5 text-foreground whitespace-pre-wrap leading-relaxed">
-                        {pjesma.text}
-                      </blockquote>
-                    </div>
-                  </details>
-                ) : (
-                  pjesma.sourceUrl && (
-                    <p class="mt-5">
-                      <a
-                        href={pjesma.sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors py-1"
-                      >
-                        Pročitaj cijelu pjesmu na poezija.hr
+                  {pjesma.text ? (
+                    <details class="pjesma group mt-5">
+                      <summary class="inline-flex cursor-pointer items-center gap-1.5 rounded-md text-sm font-medium text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background py-1">
                         <svg
-                          class="h-3 w-3"
+                          class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-open:rotate-90"
+                          viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
                           aria-hidden="true"
                         >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          />
+                          <path d="M9 6l6 6-6 6" />
                         </svg>
-                      </a>
-                    </p>
-                  )
-                )}
+                        <span class="group-open:hidden">Prikaži pjesmu</span>
+                        <span class="hidden group-open:inline">Sakrij pjesmu</span>
+                      </summary>
+                      <div class="pjesma-body overflow-hidden">
+                        <blockquote class="mt-4 border-l-2 border-primary/40 pl-5 text-foreground whitespace-pre-wrap leading-relaxed">
+                          {pjesma.text}
+                        </blockquote>
+                      </div>
+                    </details>
+                  ) : (
+                    pjesma.sourceUrl && (
+                      <p class="mt-5">
+                        <a
+                          href={pjesma.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors py-1"
+                        >
+                          Pročitaj cijelu pjesmu na poezija.hr
+                          <svg
+                            class="h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </a>
+                      </p>
+                    )
+                  )}
+                </div>
               </div>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
+            </li>
+          ))
+        }
+      </ol>
 
-    <p class="mt-12 text-sm text-muted-foreground border-t pt-6">
-      Tekstovi pjesama objavljeni su u svrhu čitanja i obrazovanja. Autorska prava na pojedina djela
-      pripadaju autorima i njihovim nasljednicima.
-    </p>
+      <p class="mt-12 text-sm text-muted-foreground border-t pt-6">
+        Tekstovi pjesama objavljeni su u svrhu čitanja i obrazovanja. Autorska prava na pojedina
+        djela pripadaju autorima i njihovim nasljednicima.
+      </p>
+    </div>
   </div>
 </BaseLayout>
 

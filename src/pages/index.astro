@@ -72,7 +72,7 @@ const zapisi: Array<{ naslov: string; tekst: string }> = [
 >
   {/* ===== Hero ===== */}
   <section class="section-kamen relative overflow-hidden">
-    <div class="container max-w-5xl mx-auto px-6 py-20 md:py-28" data-animate="fade">
+    <div class="container max-w-5xl mx-auto px-4 sm:px-6 py-20 md:py-28" data-animate="fade">
       <p class="text-xs font-semibold uppercase tracking-[0.2em] text-klein">
         Zagreb <span aria-hidden="true">·</span> Mirogoj <span aria-hidden="true">·</span> 1876.
       </p>
@@ -111,7 +111,7 @@ const zapisi: Array<{ naslov: string; tekst: string }> = [
   {/* ===== 150 godina ===== */}
   <section class="py-16 md:py-24">
     <div
-      class="container max-w-5xl mx-auto px-6 grid gap-10 md:grid-cols-5 md:items-center"
+      class="container max-w-5xl mx-auto px-4 sm:px-6 grid gap-10 md:grid-cols-5 md:items-center"
       data-animate="fade"
     >
       <div class="md:col-span-3">
@@ -152,32 +152,34 @@ const zapisi: Array<{ naslov: string; tekst: string }> = [
 
   {/* ===== Put u skolu ===== */}
   <section class="py-16 md:py-24">
-    <div class="container max-w-3xl mx-auto px-6" data-animate="fade">
-      <h2 class="font-serif-display text-3xl md:text-4xl text-klein">Put u školu</h2>
-      <div class="pleter-rule mt-5 max-w-[10rem]" aria-hidden="true"></div>
+    <div class="container max-w-5xl mx-auto px-4 sm:px-6" data-animate="fade">
+      <div class="max-w-3xl">
+        <h2 class="font-serif-display text-3xl md:text-4xl text-klein">Put u školu</h2>
+        <div class="pleter-rule mt-5 max-w-[10rem]" aria-hidden="true"></div>
 
-      <p class="pocetno-slovo mt-8 text-lg leading-relaxed text-klein">
-        Svako jutro istim putem, uz zid koji se činio dužim nego što jest. Iza njega arkade i
-        stabla, pred nama škola. Groblje je bilo dio rasporeda dana kao i tramvajska stanica — nešto
-        pokraj čega se prolazi, ne razmišljajući previše.
-      </p>
+        <p class="pocetno-slovo mt-8 text-lg leading-relaxed text-klein">
+          Svako jutro istim putem, uz zid koji se činio dužim nego što jest. Iza njega arkade i
+          stabla, pred nama škola. Groblje je bilo dio rasporeda dana kao i tramvajska stanica —
+          nešto pokraj čega se prolazi, ne razmišljajući previše.
+        </p>
 
-      <p class="mt-6 text-lg leading-relaxed text-klein">
-        Tek kasnije čovjek shvati koliko je to bilo neobično. Prolazili smo svakodnevno pokraj
-        mjesta na kojemu počiva veći dio onoga što se u školi uči — pjesnici čije smo pjesme napamet
-        znali, ljudi iz čitanki i sa spomen-ploča.
-      </p>
+        <p class="mt-6 text-lg leading-relaxed text-klein">
+          Tek kasnije čovjek shvati koliko je to bilo neobično. Prolazili smo svakodnevno pokraj
+          mjesta na kojemu počiva veći dio onoga što se u školi uči — pjesnici čije smo pjesme
+          napamet znali, ljudi iz čitanki i sa spomen-ploča.
+        </p>
 
-      <p class="mt-6 text-lg leading-relaxed text-klein">
-        Ova stranica nastala je iz tog prolaženja. Zapisi o groblju, o ljudima koji tu leže, i o
-        skupini prijatelja kojoj je Mirogoj bio putokaz na putu u školu.
-      </p>
+        <p class="mt-6 text-lg leading-relaxed text-klein">
+          Ova stranica nastala je iz tog prolaženja. Zapisi o groblju, o ljudima koji tu leže, i o
+          skupini prijatelja kojoj je Mirogoj bio putokaz na putu u školu.
+        </p>
+      </div>
     </div>
   </section>
 
   {/* ===== O groblju ===== */}
   <section id="groblje" class="section-kamen py-16 md:py-24 scroll-mt-16">
-    <div class="container max-w-5xl mx-auto px-6">
+    <div class="container max-w-5xl mx-auto px-4 sm:px-6">
       <div class="max-w-3xl" data-animate="fade">
         <h2 class="font-serif-display text-3xl md:text-4xl">O groblju</h2>
         <div class="pleter-rule mt-5 max-w-[10rem]" aria-hidden="true"></div>
@@ -203,45 +205,47 @@ const zapisi: Array<{ naslov: string; tekst: string }> = [
 
   {/* ===== Zapisi ===== */}
   <section class="py-16 md:py-24">
-    <div class="container max-w-3xl mx-auto px-6" data-animate="fade">
-      <h2 class="font-serif-display text-3xl md:text-4xl text-klein">Zapisi</h2>
-      <div class="pleter-rule mt-5 max-w-[10rem]" aria-hidden="true"></div>
+    <div class="container max-w-5xl mx-auto px-4 sm:px-6" data-animate="fade">
+      <div class="max-w-3xl">
+        <h2 class="font-serif-display text-3xl md:text-4xl text-klein">Zapisi</h2>
+        <div class="pleter-rule mt-5 max-w-[10rem]" aria-hidden="true"></div>
 
-      {
-        zapisi.length > 0 && (
-          <dl class="mt-8 space-y-6">
-            {zapisi.map((zapis) => (
-              <div class="border-l-2 border-klein pl-6">
-                <dt class="font-serif-display text-xl text-klein">{zapis.naslov}</dt>
-                <dd class="mt-2 leading-relaxed text-klein">{zapis.tekst}</dd>
-              </div>
-            ))}
-          </dl>
-        )
-      }
+        {
+          zapisi.length > 0 && (
+            <dl class="mt-8 space-y-6">
+              {zapisi.map((zapis) => (
+                <div class="border-l-2 border-klein pl-6">
+                  <dt class="font-serif-display text-xl text-klein">{zapis.naslov}</dt>
+                  <dd class="mt-2 leading-relaxed text-klein">{zapis.tekst}</dd>
+                </div>
+              ))}
+            </dl>
+          )
+        }
 
-      <div class="mt-8 rounded-lg border border-dashed bg-muted/40 p-6 md:p-8">
-        <p class="leading-relaxed text-klein">
-          Sjećanja na put u školu, na razred i na godine u kojima se tuda prolazilo upisuju se kako
-          se prikupe.
-        </p>
-        <p class="mt-4 leading-relaxed text-klein">
-          Imate fotografiju, priču ili ime koje bi ovdje trebalo stajati?{' '}
-          <a
-            href="/contact"
-            class="font-medium text-klein underline decoration-klein decoration-2 underline-offset-4 hover:text-klein/80 transition-colors"
-          >
-            Javite se
-          </a>{' '}
-          i bit će uvršteno.
-        </p>
+        <div class="mt-8 rounded-lg border border-dashed bg-muted/40 p-6 md:p-8">
+          <p class="leading-relaxed text-klein">
+            Sjećanja na put u školu, na razred i na godine u kojima se tuda prolazilo upisuju se
+            kako se prikupe.
+          </p>
+          <p class="mt-4 leading-relaxed text-klein">
+            Imate fotografiju, priču ili ime koje bi ovdje trebalo stajati?{' '}
+            <a
+              href="/contact"
+              class="font-medium text-klein underline decoration-klein decoration-2 underline-offset-4 hover:text-klein/80 transition-colors"
+            >
+              Javite se
+            </a>{' '}
+            i bit će uvršteno.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
   {/* ===== Zavrsni poziv ===== */}
   <section class="section-inverted">
-    <div class="py-14 md:py-28 px-6">
+    <div class="py-14 md:py-28 px-4 sm:px-6">
       <div class="container max-w-3xl mx-auto text-center" data-animate="scale">
         <h2 class="font-serif-display text-3xl md:text-5xl">I vi ste tuda prolazili?</h2>
         <p class="mt-5 md:mt-6 text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">

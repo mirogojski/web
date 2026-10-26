@@ -6,8 +6,6 @@ author: 'Nikola Pejdo'
 tags: ['sport', 'Mirogoj', 'povijest']
 ---
 
-# Dražen Petrović — košarkaš kojemu na grobu stoji broj tri
-
 Među grobovima na Mirogoju koje posjetitelji najčešće traže je onaj Dražena Petrovića.
 
 ## Šibenik, Zagreb, Madrid

@@ -8,75 +8,77 @@ import { sententiae } from '@/data/sententiae';
   title="Latinski"
   description="Latinske sentencije s prijevodima i izvorima — jezik natpisa na starim nadgrobnim spomenicima."
 >
-  <div class="container max-w-3xl mx-auto py-16 px-6">
-    <header class="mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Latinski</h1>
-      <p class="text-lg text-muted-foreground">
-        Dvadeset osam latinskih sentencija — kratkih izreka pjesnika, filozofa i pravnika — svaka s
-        prijevodom i izvorom. Latinski je jezik natpisa na starim nadgrobnim spomenicima, pa i na
-        mirogojskim arkadama.
-      </p>
-    </header>
+  <div class="container max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+    <div class="max-w-3xl">
+      <header class="mb-12">
+        <h1 class="font-serif-display text-3xl md:text-4xl mb-4">Latinski</h1>
+        <p class="text-lg text-muted-foreground">
+          Dvadeset osam latinskih sentencija — kratkih izreka pjesnika, filozofa i pravnika — svaka
+          s prijevodom i izvorom. Latinski je jezik natpisa na starim nadgrobnim spomenicima, pa i
+          na mirogojskim arkadama.
+        </p>
+      </header>
 
-    <form
-      class="mb-8"
-      role="search"
-      data-sententiae-search
-      hidden
-      aria-label="Pretraživanje sentencija"
-    >
-      <label for="sententiae-query" class="sr-only">Pretraži sentencije</label>
-      <div class="relative">
-        <svg
-          class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.3-4.3"></path>
-        </svg>
-        <input
-          id="sententiae-query"
-          type="search"
-          autocomplete="off"
-          placeholder="Pretraži latinski, prijevod ili izvor"
-          class="w-full min-h-11 rounded-lg border bg-card pl-11 pr-4 py-2 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          data-sententiae-input
-        />
-      </div>
-      <p
-        class="mt-2 text-sm text-muted-foreground"
-        role="status"
-        aria-live="polite"
-        data-sententiae-status
+      <form
+        class="mb-8"
+        role="search"
+        data-sententiae-search
+        hidden
+        aria-label="Pretraživanje sentencija"
       >
-      </p>
-    </form>
+        <label for="sententiae-query" class="sr-only">Pretraži sentencije</label>
+        <div class="relative">
+          <svg
+            class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <input
+            id="sententiae-query"
+            type="search"
+            autocomplete="off"
+            placeholder="Pretraži latinski, prijevod ili izvor"
+            class="w-full min-h-11 rounded-lg border bg-card pl-11 pr-4 py-2 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            data-sententiae-input
+          />
+        </div>
+        <p
+          class="mt-2 text-sm text-muted-foreground"
+          role="status"
+          aria-live="polite"
+          data-sententiae-status
+        >
+        </p>
+      </form>
 
-    <div class="rounded-lg border bg-card" data-animate="fade">
-      <ul class="divide-y" data-sententiae-list>
-        {
-          sententiae.map((item) => (
-            <li
-              class="p-6 md:p-8"
-              data-sententia
-              data-haystack={`${item.latin} ${item.translation} ${item.source}`.toLowerCase()}
-            >
-              <p class="text-lg md:text-xl font-semibold text-foreground italic">{item.latin}</p>
-              <p class="text-muted-foreground mt-2">{item.translation}</p>
-              <p class="text-sm text-muted-foreground/80 mt-3">{item.source}</p>
-            </li>
-          ))
-        }
-      </ul>
-      <p class="hidden p-6 md:p-8 text-muted-foreground" data-sententiae-empty>
-        Nema sentencije koja odgovara upitu.
-      </p>
+      <div class="rounded-lg border bg-card" data-animate="fade">
+        <ul class="divide-y" data-sententiae-list>
+          {
+            sententiae.map((item) => (
+              <li
+                class="p-6 md:p-8"
+                data-sententia
+                data-haystack={`${item.latin} ${item.translation} ${item.source}`.toLowerCase()}
+              >
+                <p class="text-lg md:text-xl font-semibold text-foreground italic">{item.latin}</p>
+                <p class="text-muted-foreground mt-2">{item.translation}</p>
+                <p class="text-sm text-muted-foreground/80 mt-3">{item.source}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="hidden p-6 md:p-8 text-muted-foreground" data-sententiae-empty>
+          Nema sentencije koja odgovara upitu.
+        </p>
+      </div>
     </div>
   </div>
 </BaseLayout>
