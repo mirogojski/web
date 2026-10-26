@@ -3,6 +3,7 @@ title: '150 godina Mirogoja — 6. studenoga 1876. – 2026.'
 description: 'Mirogoj 6. studenoga 2026. navršava 150 godina. O tome kako je nastao na Gajevu posjedu, što ga je od početka razlikovalo i zašto je danas više od groblja.'
 pubDate: 2026-10-26
 author: 'Nikola Pejdo'
+image: '/images/150-godina/mirogoj-alka.jpg'
 tags: ['Mirogoj', 'povijest', 'obljetnica']
 ---
 
