@@ -5,6 +5,12 @@
   "name": "web",
   "main": "worker/index.ts",
   "compatibility_date": "2026-10-01",
+  // Builds dist/ before every deploy and dev run, so the deploy does not rely
+  // on a build command set in the Cloudflare dashboard.
+  "build": {
+    "command": "npm run build",
+    "watch_dir": "./src"
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

@@ -17,7 +17,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check:kpis": "node .claude/scripts/check-kpis.mjs",
-    "preview:worker": "astro build && wrangler dev"
+    "preview:worker": "wrangler dev"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.2",
